@@ -29,10 +29,10 @@
         private void InitializeComponent()
         {
             this.CarList = new System.Windows.Forms.ListBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.textBox3 = new System.Windows.Forms.TextBox();
-            this.textBox4 = new System.Windows.Forms.TextBox();
+            this.tbxMake = new System.Windows.Forms.TextBox();
+            this.tbxModel = new System.Windows.Forms.TextBox();
+            this.tbxYear = new System.Windows.Forms.TextBox();
+            this.tbxPrice = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -42,8 +42,8 @@
             this.label7 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
+            this.btnAddToList = new System.Windows.Forms.Button();
+            this.btnClearList = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // CarList
@@ -55,37 +55,37 @@
             this.CarList.Size = new System.Drawing.Size(461, 214);
             this.CarList.TabIndex = 0;
             // 
-            // textBox1
+            // tbxMake
             // 
-            this.textBox1.BackColor = System.Drawing.Color.Silver;
-            this.textBox1.Location = new System.Drawing.Point(107, 76);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(185, 23);
-            this.textBox1.TabIndex = 1;
+            this.tbxMake.BackColor = System.Drawing.Color.Silver;
+            this.tbxMake.Location = new System.Drawing.Point(107, 76);
+            this.tbxMake.Name = "tbxMake";
+            this.tbxMake.Size = new System.Drawing.Size(185, 23);
+            this.tbxMake.TabIndex = 1;
             // 
-            // textBox2
+            // tbxModel
             // 
-            this.textBox2.BackColor = System.Drawing.Color.Silver;
-            this.textBox2.Location = new System.Drawing.Point(107, 126);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(185, 23);
-            this.textBox2.TabIndex = 2;
+            this.tbxModel.BackColor = System.Drawing.Color.Silver;
+            this.tbxModel.Location = new System.Drawing.Point(107, 126);
+            this.tbxModel.Name = "tbxModel";
+            this.tbxModel.Size = new System.Drawing.Size(185, 23);
+            this.tbxModel.TabIndex = 2;
             // 
-            // textBox3
+            // tbxYear
             // 
-            this.textBox3.BackColor = System.Drawing.Color.Silver;
-            this.textBox3.Location = new System.Drawing.Point(107, 178);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(185, 23);
-            this.textBox3.TabIndex = 3;
+            this.tbxYear.BackColor = System.Drawing.Color.Silver;
+            this.tbxYear.Location = new System.Drawing.Point(107, 175);
+            this.tbxYear.Name = "tbxYear";
+            this.tbxYear.Size = new System.Drawing.Size(185, 23);
+            this.tbxYear.TabIndex = 3;
             // 
-            // textBox4
+            // tbxPrice
             // 
-            this.textBox4.BackColor = System.Drawing.Color.Silver;
-            this.textBox4.Location = new System.Drawing.Point(107, 221);
-            this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(185, 23);
-            this.textBox4.TabIndex = 4;
+            this.tbxPrice.BackColor = System.Drawing.Color.Silver;
+            this.tbxPrice.Location = new System.Drawing.Point(107, 221);
+            this.tbxPrice.Name = "tbxPrice";
+            this.tbxPrice.Size = new System.Drawing.Size(185, 23);
+            this.tbxPrice.TabIndex = 4;
             // 
             // label1
             // 
@@ -108,7 +108,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(45, 181);
+            this.label3.Location = new System.Drawing.Point(45, 178);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(32, 15);
             this.label3.TabIndex = 7;
@@ -153,7 +153,7 @@
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(589, 49);
+            this.label8.Location = new System.Drawing.Point(597, 49);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(33, 15);
             this.label8.TabIndex = 12;
@@ -168,31 +168,31 @@
             this.label9.TabIndex = 13;
             this.label9.Text = "Price (Including GST)";
             // 
-            // button1
+            // btnAddToList
             // 
-            this.button1.Location = new System.Drawing.Point(107, 259);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 31);
-            this.button1.TabIndex = 14;
-            this.button1.Text = "Add To List";
-            this.button1.UseVisualStyleBackColor = true;
+            this.btnAddToList.Location = new System.Drawing.Point(107, 259);
+            this.btnAddToList.Name = "btnAddToList";
+            this.btnAddToList.Size = new System.Drawing.Size(75, 31);
+            this.btnAddToList.TabIndex = 14;
+            this.btnAddToList.Text = "Add To List";
+            this.btnAddToList.UseVisualStyleBackColor = true;
             // 
-            // button2
+            // btnClearList
             // 
-            this.button2.Location = new System.Drawing.Point(217, 259);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 31);
-            this.button2.TabIndex = 15;
-            this.button2.Text = "Clear List";
-            this.button2.UseVisualStyleBackColor = true;
+            this.btnClearList.Location = new System.Drawing.Point(217, 259);
+            this.btnClearList.Name = "btnClearList";
+            this.btnClearList.Size = new System.Drawing.Size(75, 31);
+            this.btnClearList.TabIndex = 15;
+            this.btnClearList.Text = "Clear List";
+            this.btnClearList.UseVisualStyleBackColor = true;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(828, 450);
-            this.Controls.Add(this.button2);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.btnClearList);
+            this.Controls.Add(this.btnAddToList);
             this.Controls.Add(this.label9);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.label7);
@@ -202,10 +202,10 @@
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.textBox4);
-            this.Controls.Add(this.textBox3);
-            this.Controls.Add(this.textBox2);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.tbxPrice);
+            this.Controls.Add(this.tbxYear);
+            this.Controls.Add(this.tbxModel);
+            this.Controls.Add(this.tbxMake);
             this.Controls.Add(this.CarList);
             this.Name = "Form1";
             this.Text = "Form1";
@@ -217,10 +217,10 @@
         #endregion
 
         private ListBox CarList;
-        private TextBox textBox1;
-        private TextBox textBox2;
-        private TextBox textBox3;
-        private TextBox textBox4;
+        private TextBox tbxMake;
+        private TextBox tbxModel;
+        private TextBox tbxYear;
+        private TextBox tbxPrice;
         private Label label1;
         private Label label2;
         private Label label3;
@@ -230,7 +230,7 @@
         private Label label7;
         private Label label8;
         private Label label9;
-        private Button button1;
-        private Button button2;
+        private Button btnAddToList;
+        private Button btnClearList;
     }
 }
