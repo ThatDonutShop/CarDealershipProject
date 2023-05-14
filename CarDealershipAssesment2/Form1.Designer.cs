@@ -48,9 +48,11 @@
             // 
             // CarList
             // 
+            CarList.Cursor = Cursors.UpArrow;
             CarList.FormattingEnabled = true;
             CarList.ItemHeight = 15;
             CarList.Location = new Point(327, 76);
+            CarList.MultiColumn = true;
             CarList.Name = "CarList";
             CarList.Size = new Size(461, 214);
             CarList.TabIndex = 0;

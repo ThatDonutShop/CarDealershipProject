@@ -15,6 +15,7 @@ namespace CarDealershipAssesment2
             var year = int.Parse(Year.Text ?? throw new NullReferenceException());
             var price = decimal.Parse(Price.Text);
             var car = Car.Create(Make.Text, Model.Text, year, price);
+            CarList.Items.Add(car);
         }
     }
 }
