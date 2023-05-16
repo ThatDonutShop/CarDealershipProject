@@ -44,20 +44,17 @@
             label9 = new Label();
             AddToList = new Button();
             btnClearList = new Button();
-            label10 = new Label();
-            AverageCarSalesIncludingGst = new Label();
             SuspendLayout();
             // 
             // CarList
             // 
             CarList.Cursor = Cursors.UpArrow;
-            CarList.Font = new Font("Sans Serif Collection", 9F, FontStyle.Regular, GraphicsUnit.Point);
             CarList.FormattingEnabled = true;
-            CarList.ItemHeight = 29;
+            CarList.ItemHeight = 15;
             CarList.Location = new Point(327, 76);
             CarList.MultiColumn = true;
             CarList.Name = "CarList";
-            CarList.Size = new Size(461, 207);
+            CarList.Size = new Size(461, 214);
             CarList.TabIndex = 0;
             // 
             // Make
@@ -191,33 +188,12 @@
             btnClearList.TabIndex = 15;
             btnClearList.Text = "Clear List";
             btnClearList.UseVisualStyleBackColor = true;
-            btnClearList.Click += ClearCarList_Click;
-            // 
-            // label10
-            // 
-            label10.AutoSize = true;
-            label10.Location = new Point(362, 302);
-            label10.Name = "label10";
-            label10.Size = new Size(171, 15);
-            label10.TabIndex = 16;
-            label10.Text = "Average car sale price (inc GST)";
-            // 
-            // AverageCarSalesIncludingGst
-            // 
-            AverageCarSalesIncludingGst.AutoSize = true;
-            AverageCarSalesIncludingGst.Location = new Point(539, 302);
-            AverageCarSalesIncludingGst.Name = "AverageCarSalesIncludingGst";
-            AverageCarSalesIncludingGst.Size = new Size(0, 15);
-            AverageCarSalesIncludingGst.TabIndex = 17;
             // 
             // Form1
             // 
-            AcceptButton = AddToList;
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(828, 450);
-            Controls.Add(AverageCarSalesIncludingGst);
-            Controls.Add(label10);
             Controls.Add(btnClearList);
             Controls.Add(AddToList);
             Controls.Add(label9);
@@ -235,8 +211,7 @@
             Controls.Add(Make);
             Controls.Add(CarList);
             Name = "Form1";
-            Text = "CarListForm";
-            Load += LoadForm;
+            Text = "Form1";
             ResumeLayout(false);
             PerformLayout();
         }
@@ -259,7 +234,5 @@
         private Label label9;
         private Button AddToList;
         private Button btnClearList;
-        private Label label10;
-        private Label AverageCarSalesIncludingGst;
     }
 }
