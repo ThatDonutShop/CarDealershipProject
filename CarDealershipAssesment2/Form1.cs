@@ -12,7 +12,7 @@ namespace CarDealershipAssesment2
 
         private void AddToList_Click(object sender, EventArgs e)
         {
-            var year = int.Parse(Year.Text ?? throw new NullReferenceException());
+            var year = int.Parse(Year.Text);
             var price = decimal.Parse(Price.Text);
             var car = Car.Create(Make.Text, Model.Text, year, price);
             CarList.Items.Add(car);

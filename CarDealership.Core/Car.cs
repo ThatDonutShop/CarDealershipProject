@@ -3,6 +3,8 @@ namespace CarDealership.Core
 {
     public sealed class Car
     {
+        private const int Gst = 15;
+
         public string Make { get; set; }
 
         public string Model { get; set; }
@@ -11,10 +13,15 @@ namespace CarDealership.Core
 
         public decimal Price { get; set; }
 
-        public decimal TotalPrice => CalculateTotalPrice();
+        public decimal TotalPrice
+        {
+            get
+            {
+                var gst = CalculateGst(Price);
+                return Price + gst;
+            }
+        }
 
-        private decimal CalculateTotalPrice() => Price * 15 / 100;
-        
         public override string ToString()
         {
             return $"{Make,-10} {Model,-10} {Year,-10} {Price,-10:C} {TotalPrice,-10:C}";
@@ -29,6 +36,11 @@ namespace CarDealership.Core
                 Year = year,
                 Price = price
             };
+        }
+
+        private static decimal CalculateGst(decimal amount)
+        {
+            return amount * Gst / 100;
         }
     }
 }
