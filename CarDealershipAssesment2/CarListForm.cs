@@ -25,7 +25,6 @@ namespace CarDealershipAssesment2
         }
         private void AddToList_Click_1(object sender, EventArgs e)
         {
-            // TODO: validation 
 
             var year = int.Parse(Year.Text);
             var price = decimal.Parse(Price.Text);
@@ -41,9 +40,9 @@ namespace CarDealershipAssesment2
         private void ShowSaleStatistics()
         {
             var cars = CarList.Items.OfType<Car>();
-
-            AverageCarSalesIncludingGst.Text = CarSales.GetAverageCarSalePriceIncludingGst(cars).ToString();
-            AverageCarSalesExcludingGst.Text = CarSales.GetAverageCarSalePriceExcludingGst(cars).ToString();
+            //TODO: money format
+            AverageCarSalesIncludingGst.Text = CarSales.GetAverageCarSalePriceIncludingGst(cars).ToString("C");
+            AverageCarSalesExcludingGst.Text = CarSales.GetAverageCarSalePriceExcludingGst(cars).ToString("C");
         }
 
         private void ClearList_Click(object sender, EventArgs e)
@@ -54,6 +53,34 @@ namespace CarDealershipAssesment2
             AverageCarSalesExcludingGst.Text = string.Empty;
         }
 
-        
+        private void MakeValidating(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(Make.Text))
+            {
+                e.Cancel = true;
+                Make.Focus();
+                errorProviderIsNull.SetError(Make, "You must enter a cars make. It cant be left empty");
+            }
+            else
+            {
+                e.Cancel = false;
+                errorProviderIsNull.SetError(Make, "");
+            }
+        }
+
+        private void ModelValidating(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(Model.Text))
+            {
+                e.Cancel = true;
+                Model.Focus();
+                errorProviderIsNull.SetError(Model, "You must enter a cars Model. It cant be left empty");
+            }
+            else
+            {
+                e.Cancel = false;
+                errorProviderIsNull.SetError(Model, "");
+            }
+        }
     }
 }
