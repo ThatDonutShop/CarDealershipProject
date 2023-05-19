@@ -64,7 +64,7 @@ namespace CarDealershipAssesment2
             else
             {
                 e.Cancel = false;
-                errorProviderIsNull.SetError(Make, "");
+                //errorProviderIsNull.SetError(Make, "");
             }
         }
 
@@ -80,6 +80,32 @@ namespace CarDealershipAssesment2
             {
                 e.Cancel = false;
                 errorProviderIsNull.SetError(Model, "");
+            }
+        }
+
+        private void YearValidating(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(Year.Text))
+            {
+                e.Cancel = true;
+                Year.Focus();
+                errorProviderIsNull.SetError(Year, "You must enter a cars Year. It cant be left empty");
+            }
+            else
+            {
+                e.Cancel = false;
+                errorProviderIsNull.SetError(Year, "");
+            }
+            if (!decimal.TryParse(Year.Text, out decimal result))
+            {
+                e.Cancel = true;
+                Year.Focus();
+                errorProviderNotInt.SetError(Year, "You must enter a cars Year. It cant be text only numbers are accepted");
+            }
+            else
+            {
+                e.Cancel = false;
+                errorProviderNotInt.SetError(Year, "");
             }
         }
     }

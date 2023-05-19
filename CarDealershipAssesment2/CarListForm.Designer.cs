@@ -92,6 +92,7 @@
             Year.Name = "Year";
             Year.Size = new Size(185, 23);
             Year.TabIndex = 3;
+            Year.Validating += YearValidating;
             // 
             // Price
             // 
