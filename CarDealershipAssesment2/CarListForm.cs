@@ -1,4 +1,5 @@
 using CarDealership.Core;
+using System.Text.RegularExpressions;
 
 namespace CarDealershipAssesment2
 {
@@ -25,7 +26,6 @@ namespace CarDealershipAssesment2
         }
         private void AddToList_Click_1(object sender, EventArgs e)
         {
-
             var year = int.Parse(Year.Text);
             var price = decimal.Parse(Price.Text);
             var car = Car.Create(Make.Text, Model.Text, year, price);
@@ -40,7 +40,6 @@ namespace CarDealershipAssesment2
         private void ShowSaleStatistics()
         {
             var cars = CarList.Items.OfType<Car>();
-            //TODO: money format
             AverageCarSalesIncludingGst.Text = CarSales.GetAverageCarSalePriceIncludingGst(cars).ToString("C");
             AverageCarSalesExcludingGst.Text = CarSales.GetAverageCarSalePriceExcludingGst(cars).ToString("C");
         }
@@ -53,59 +52,65 @@ namespace CarDealershipAssesment2
             AverageCarSalesExcludingGst.Text = string.Empty;
         }
 
-        private void MakeValidating(object sender, System.ComponentModel.CancelEventArgs e)
+        private void ValidateNotEmpty(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            if (string.IsNullOrWhiteSpace(Make.Text))
+            var input = (TextBox)sender;
+
+            if (string.IsNullOrWhiteSpace(input.Text))
             {
-                e.Cancel = true;
-                Make.Focus();
-                errorProviderIsNull.SetError(Make, "You must enter a cars make. It cant be left empty");
+                carErrorProvider.SetError(input, "It can't be left empty");
             }
             else
             {
-                e.Cancel = false;
-                //errorProviderIsNull.SetError(Make, "");
+                carErrorProvider.SetError(input, string.Empty);
             }
         }
 
-        private void ModelValidating(object sender, System.ComponentModel.CancelEventArgs e)
+        /// <summary>
+        /// Validate the year of the car using a regular expression"
+        /// https://stackoverflow.com/questions/4374185/regular-expression-match-to-test-for-a-valid-year
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ValidateYear(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            if (string.IsNullOrWhiteSpace(Model.Text))
+            var input = (TextBox)sender;
+
+            if (new Regex("^(19|20)\\d{2}$").IsMatch(input.Text))
             {
-                e.Cancel = true;
-                Model.Focus();
-                errorProviderIsNull.SetError(Model, "You must enter a cars Model. It cant be left empty");
+                carErrorProvider.SetError(Year, string.Empty);
+
+                var year = int.Parse(input.Text);
+
+                if (year > DateTime.Now.Year)
+                {
+                    carErrorProvider.SetError(Year, $"The year cannot be greater than {DateTime.Now.Year}");
+                }
             }
             else
             {
-                e.Cancel = false;
-                errorProviderIsNull.SetError(Model, "");
+                carErrorProvider.SetError(Year, "Only valid years are allowed. Example: 2023");
             }
         }
 
-        private void YearValidating(object sender, System.ComponentModel.CancelEventArgs e)
+        private void ValidatePrice(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            if (string.IsNullOrWhiteSpace(Year.Text))
+            var input = (TextBox)sender;
+
+            if (decimal.TryParse(input.Text, out decimal price))
             {
-                e.Cancel = true;
-                Year.Focus();
-                errorProviderIsNull.SetError(Year, "You must enter a cars Year. It cant be left empty");
+                if (price > decimal.Zero)
+                {
+                    carErrorProvider.SetError(input, string.Empty);
+                }
+                else
+                {
+                    carErrorProvider.SetError(input, "A price greater than zero is required.");
+                }
             }
             else
             {
-                e.Cancel = false;
-                errorProviderIsNull.SetError(Year, "");
-            }
-            if (!decimal.TryParse(Year.Text, out decimal result))
-            {
-                e.Cancel = true;
-                Year.Focus();
-                errorProviderNotInt.SetError(Year, "You must enter a cars Year. It cant be text only numbers are accepted");
-            }
-            else
-            {
-                e.Cancel = false;
-                errorProviderNotInt.SetError(Year, "");
+                carErrorProvider.SetError(input, "Only a valid price is allowed. Example 9,000");
             }
         }
     }

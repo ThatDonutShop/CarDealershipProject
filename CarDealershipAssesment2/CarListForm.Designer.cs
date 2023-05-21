@@ -49,10 +49,10 @@
             AverageCarSalesIncludingGst = new Label();
             label11 = new Label();
             AverageCarSalesExcludingGst = new Label();
-            errorProviderIsNull = new ErrorProvider(components);
-            errorProviderNotInt = new ErrorProvider(components);
-            ((System.ComponentModel.ISupportInitialize)errorProviderIsNull).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)errorProviderNotInt).BeginInit();
+            carErrorProvider = new ErrorProvider(components);
+            errorProvider2 = new ErrorProvider(components);
+            ((System.ComponentModel.ISupportInitialize)carErrorProvider).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)errorProvider2).BeginInit();
             SuspendLayout();
             // 
             // CarList
@@ -74,7 +74,7 @@
             Make.Name = "Make";
             Make.Size = new Size(185, 23);
             Make.TabIndex = 1;
-            Make.Validating += MakeValidating;
+            Make.Validating += ValidateNotEmpty;
             // 
             // Model
             // 
@@ -83,7 +83,7 @@
             Model.Name = "Model";
             Model.Size = new Size(185, 23);
             Model.TabIndex = 2;
-            Model.Validating += ModelValidating;
+            Model.Validating += ValidateNotEmpty;
             // 
             // Year
             // 
@@ -92,7 +92,7 @@
             Year.Name = "Year";
             Year.Size = new Size(185, 23);
             Year.TabIndex = 3;
-            Year.Validating += YearValidating;
+            Year.Validating += ValidateYear;
             // 
             // Price
             // 
@@ -101,6 +101,7 @@
             Price.Name = "Price";
             Price.Size = new Size(185, 23);
             Price.TabIndex = 4;
+            Price.Validating += ValidatePrice;
             // 
             // label1
             // 
@@ -240,13 +241,13 @@
             AverageCarSalesExcludingGst.Size = new Size(0, 15);
             AverageCarSalesExcludingGst.TabIndex = 19;
             // 
-            // errorProviderIsNull
+            // carErrorProvider
             // 
-            errorProviderIsNull.ContainerControl = this;
+            carErrorProvider.ContainerControl = this;
             // 
-            // errorProviderNotInt
+            // errorProvider2
             // 
-            errorProviderNotInt.ContainerControl = this;
+            errorProvider2.ContainerControl = this;
             // 
             // CarListForm
             // 
@@ -277,8 +278,8 @@
             Name = "CarListForm";
             Text = "CarListForm";
             Load += CarListForm_Load;
-            ((System.ComponentModel.ISupportInitialize)errorProviderIsNull).EndInit();
-            ((System.ComponentModel.ISupportInitialize)errorProviderNotInt).EndInit();
+            ((System.ComponentModel.ISupportInitialize)carErrorProvider).EndInit();
+            ((System.ComponentModel.ISupportInitialize)errorProvider2).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -306,7 +307,7 @@
         private Label label11;
         private Label AverageCarSalesExcludingGst;
         private ErrorProvider errorProvider1;
-        private ErrorProvider errorProviderIsNull;
-        private ErrorProvider errorProviderNotInt;
+        private ErrorProvider carErrorProvider;
+        private ErrorProvider errorProvider2;
     }
 }
