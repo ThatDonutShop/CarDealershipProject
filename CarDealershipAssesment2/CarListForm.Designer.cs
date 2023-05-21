@@ -50,9 +50,7 @@
             label11 = new Label();
             AverageCarSalesExcludingGst = new Label();
             carErrorProvider = new ErrorProvider(components);
-            errorProvider2 = new ErrorProvider(components);
             ((System.ComponentModel.ISupportInitialize)carErrorProvider).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)errorProvider2).BeginInit();
             SuspendLayout();
             // 
             // CarList
@@ -192,7 +190,7 @@
             AddToList.TabIndex = 14;
             AddToList.Text = "Add To List";
             AddToList.UseVisualStyleBackColor = true;
-            AddToList.Click += AddToList_Click_1;
+            AddToList.Click += AddToList_OnClick;
             // 
             // ClearList
             // 
@@ -243,11 +241,8 @@
             // 
             // carErrorProvider
             // 
+            carErrorProvider.BlinkStyle = ErrorBlinkStyle.NeverBlink;
             carErrorProvider.ContainerControl = this;
-            // 
-            // errorProvider2
-            // 
-            errorProvider2.ContainerControl = this;
             // 
             // CarListForm
             // 
@@ -279,7 +274,6 @@
             Text = "CarListForm";
             Load += CarListForm_Load;
             ((System.ComponentModel.ISupportInitialize)carErrorProvider).EndInit();
-            ((System.ComponentModel.ISupportInitialize)errorProvider2).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -308,6 +302,5 @@
         private Label AverageCarSalesExcludingGst;
         private ErrorProvider errorProvider1;
         private ErrorProvider carErrorProvider;
-        private ErrorProvider errorProvider2;
     }
 }

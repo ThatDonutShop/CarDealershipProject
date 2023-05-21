@@ -5,6 +5,8 @@ namespace CarDealershipAssesment2
 {
     public partial class CarListForm : Form
     {
+        private bool _formValid = false;
+
         public CarListForm()
         {
             InitializeComponent();
@@ -21,10 +23,9 @@ namespace CarDealershipAssesment2
             Model.Text = string.Empty;
             Year.Text = string.Empty;
             Price.Text = string.Empty;
-
-            Make.Focus();
         }
-        private void AddToList_Click_1(object sender, EventArgs e)
+
+        private void AddToList_OnClick(object sender, EventArgs e)
         {
             var year = int.Parse(Year.Text);
             var price = decimal.Parse(Price.Text);
