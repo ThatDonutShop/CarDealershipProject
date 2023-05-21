@@ -272,7 +272,6 @@
             Controls.Add(CarList);
             Name = "CarListForm";
             Text = "CarListForm";
-            Load += CarListForm_Load;
             ((System.ComponentModel.ISupportInitialize)carErrorProvider).EndInit();
             ResumeLayout(false);
             PerformLayout();

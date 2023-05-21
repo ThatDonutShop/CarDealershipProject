@@ -9,6 +9,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="FluentValidation" Version="11.5.2" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\CarDealership.Core\CarDealership.Core.csproj" />
   </ItemGroup>
 

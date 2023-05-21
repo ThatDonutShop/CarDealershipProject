@@ -5,9 +5,9 @@ namespace CarDealership.Core
     {
         private const int Gst = 15;
 
-        public string Make { get; set; }
+        public string Make { get; set; } = default!;
 
-        public string Model { get; set; }
+        public string Model { get; set; } = default!;
 
         public int Year { get; set; }
 

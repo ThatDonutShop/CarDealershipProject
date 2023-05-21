@@ -5,16 +5,9 @@ namespace CarDealershipAssesment2
 {
     public partial class CarListForm : Form
     {
-        private bool _formValid = false;
-
         public CarListForm()
         {
             InitializeComponent();
-        }
-
-        private void CarListForm_Load(object sender, EventArgs e)
-        {
-            ActiveControl = Make;
         }
 
         private void ClearInputs()
@@ -27,15 +20,18 @@ namespace CarDealershipAssesment2
 
         private void AddToList_OnClick(object sender, EventArgs e)
         {
-            var year = int.Parse(Year.Text);
-            var price = decimal.Parse(Price.Text);
-            var car = Car.Create(Make.Text, Model.Text, year, price);
+            if (this.ValidateChildren())
+            {            
+                var year = int.Parse(Year.Text);
+                var price = decimal.Parse(Price.Text);
+                var car = Car.Create(Make.Text, Model.Text, year, price);
 
-            CarList.Items.Add(car);
+                CarList.Items.Add(car);
 
-            ShowSaleStatistics();
+                ShowSaleStatistics();
 
-            ClearInputs();
+                ClearInputs();
+            }           
         }
 
         private void ShowSaleStatistics()
@@ -60,6 +56,7 @@ namespace CarDealershipAssesment2
             if (string.IsNullOrWhiteSpace(input.Text))
             {
                 carErrorProvider.SetError(input, "It can't be left empty");
+                e.Cancel = true;
             }
             else
             {
@@ -85,11 +82,13 @@ namespace CarDealershipAssesment2
 
                 if (year > DateTime.Now.Year)
                 {
+                    e.Cancel = true;
                     carErrorProvider.SetError(Year, $"The year cannot be greater than {DateTime.Now.Year}");
                 }
             }
             else
             {
+                e.Cancel = true;
                 carErrorProvider.SetError(Year, "Only valid years are allowed. Example: 2023");
             }
         }
@@ -106,11 +105,13 @@ namespace CarDealershipAssesment2
                 }
                 else
                 {
+                    e.Cancel = true;
                     carErrorProvider.SetError(input, "A price greater than zero is required.");
                 }
             }
             else
             {
+                e.Cancel = true;
                 carErrorProvider.SetError(input, "Only a valid price is allowed. Example 9,000");
             }
         }
