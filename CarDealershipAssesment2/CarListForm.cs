@@ -21,7 +21,7 @@ namespace CarDealershipAssesment2
         private void AddToList_OnClick(object sender, EventArgs e)
         {
             if (this.ValidateChildren())
-            {            
+            {
                 var year = int.Parse(Year.Text);
                 var price = decimal.Parse(Price.Text);
                 var car = Car.Create(Make.Text, Model.Text, year, price);
@@ -31,7 +31,7 @@ namespace CarDealershipAssesment2
                 ShowSaleStatistics();
 
                 ClearInputs();
-            }           
+            }
         }
 
         private void ShowSaleStatistics()
@@ -114,6 +114,11 @@ namespace CarDealershipAssesment2
                 e.Cancel = true;
                 carErrorProvider.SetError(input, "Only a valid price is allowed. Example 9,000");
             }
+        }
+
+        private void label9_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

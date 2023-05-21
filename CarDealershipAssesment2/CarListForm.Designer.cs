@@ -62,7 +62,7 @@
             CarList.Location = new Point(327, 76);
             CarList.MultiColumn = true;
             CarList.Name = "CarList";
-            CarList.Size = new Size(461, 199);
+            CarList.Size = new Size(460, 199);
             CarList.TabIndex = 0;
             // 
             // Make
@@ -176,7 +176,7 @@
             // label9
             // 
             label9.AutoSize = true;
-            label9.Location = new Point(673, 49);
+            label9.Location = new Point(670, 49);
             label9.Name = "label9";
             label9.Size = new Size(117, 15);
             label9.TabIndex = 13;
