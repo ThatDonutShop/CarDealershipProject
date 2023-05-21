@@ -24,7 +24,7 @@ namespace CarDealership.Core
 
         public override string ToString()
         {
-            return $"{Make,-10} {Model,-10} {Year,-10} {Price,-10:C} {TotalPrice,-10:C}";
+            return $"{Make,-15} {Model,-10} {Year,-10} {Price,-10:C} {TotalPrice :C}";
         }
 
         public static Car Create(string make, string model, int year, decimal price)
