@@ -115,10 +115,5 @@ namespace CarDealershipAssesment2
                 carErrorProvider.SetError(input, "Only a valid price is allowed. Example 9,000");
             }
         }
-
-        private void label9_Click(object sender, EventArgs e)
-        {
-
-        }
     }
 }
