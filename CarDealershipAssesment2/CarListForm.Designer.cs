@@ -1,4 +1,4 @@
-﻿namespace CarDealershipAssesment2
+﻿namespace CarDealership.WinForms
 {
     partial class CarListForm
     {
@@ -299,7 +299,6 @@
         private Label AverageCarSalesIncludingGst;
         private Label label11;
         private Label AverageCarSalesExcludingGst;
-        private ErrorProvider errorProvider1;
         private ErrorProvider carErrorProvider;
     }
 }

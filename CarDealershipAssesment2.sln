@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.4.33213.308
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CarDealership.Form", "CarDealershipAssesment2\CarDealership.Form.csproj", "{4588A375-661C-4BEA-93F7-9C24E67E471F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CarDealership.WinForms", "CarDealershipAssesment2\CarDealership.WinForms.csproj", "{4588A375-661C-4BEA-93F7-9C24E67E471F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CarDealership.Core", "CarDealership.Core\CarDealership.Core.csproj", "{1895BC41-9458-4B07-9175-37A956E7E573}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CarDealership.Core", "CarDealership.Core\CarDealership.Core.csproj", "{1895BC41-9458-4B07-9175-37A956E7E573}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

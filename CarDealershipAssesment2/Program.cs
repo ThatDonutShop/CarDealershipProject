@@ -1,4 +1,4 @@
-namespace CarDealershipAssesment2
+namespace CarDealership.WinForms
 {
     internal static class Program
     {

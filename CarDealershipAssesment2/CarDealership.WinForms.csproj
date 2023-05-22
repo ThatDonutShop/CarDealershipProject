@@ -11,5 +11,5 @@
   <ItemGroup>
     <ProjectReference Include="..\CarDealership.Core\CarDealership.Core.csproj" />
   </ItemGroup>
-
+  
 </Project>

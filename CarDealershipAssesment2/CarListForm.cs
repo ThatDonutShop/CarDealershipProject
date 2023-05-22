@@ -1,7 +1,7 @@
 using CarDealership.Core;
 using System.Text.RegularExpressions;
 
-namespace CarDealershipAssesment2
+namespace CarDealership.WinForms
 {
     public partial class CarListForm : Form
     {

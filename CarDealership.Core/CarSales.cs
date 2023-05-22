@@ -1,6 +1,4 @@
-﻿using CarDealership.Core;
-
-namespace CarDealershipAssesment2
+﻿namespace CarDealership.Core
 {
     public static class CarSales
     {
