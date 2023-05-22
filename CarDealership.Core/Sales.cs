@@ -1,6 +1,6 @@
 ﻿namespace CarDealership.Core
 {
-    public static class CarSales
+    public static class Sales
     {
         public static decimal GetAverageCarSalePriceIncludingGst(IEnumerable<Car> cars)
         {
@@ -9,6 +9,11 @@
             foreach (var car in cars)
             {
                 prices.Add(car.TotalPrice);
+            }
+
+            if (prices.Count == 0)
+            {
+                return decimal.Zero;
             }
 
             return prices.Average();
@@ -22,6 +27,11 @@
             {
                 prices.Add(car.Price);
             }
+
+            if (prices.Count == 0)
+            {
+                return decimal.Zero;
+            }   
 
             return prices.Average();
         }

@@ -208,7 +208,7 @@
             // 
             label10.AutoSize = true;
             label10.BackColor = SystemColors.Control;
-            label10.Location = new Point(362, 304);
+            label10.Location = new Point(385, 304);
             label10.Name = "label10";
             label10.Size = new Size(171, 15);
             label10.TabIndex = 16;
@@ -218,15 +218,16 @@
             // 
             AverageCarSalesIncludingGst.AutoSize = true;
             AverageCarSalesIncludingGst.BackColor = SystemColors.Control;
-            AverageCarSalesIncludingGst.Location = new Point(551, 304);
+            AverageCarSalesIncludingGst.Location = new Point(567, 304);
             AverageCarSalesIncludingGst.Name = "AverageCarSalesIncludingGst";
-            AverageCarSalesIncludingGst.Size = new Size(0, 15);
+            AverageCarSalesIncludingGst.Size = new Size(34, 15);
             AverageCarSalesIncludingGst.TabIndex = 17;
+            AverageCarSalesIncludingGst.Text = "$0.00";
             // 
             // label11
             // 
             label11.AutoSize = true;
-            label11.Location = new Point(362, 327);
+            label11.Location = new Point(380, 327);
             label11.Name = "label11";
             label11.Size = new Size(176, 15);
             label11.TabIndex = 18;
@@ -236,10 +237,11 @@
             // 
             AverageCarSalesExcludingGst.AutoSize = true;
             AverageCarSalesExcludingGst.BackColor = SystemColors.Control;
-            AverageCarSalesExcludingGst.Location = new Point(551, 327);
+            AverageCarSalesExcludingGst.Location = new Point(567, 327);
             AverageCarSalesExcludingGst.Name = "AverageCarSalesExcludingGst";
-            AverageCarSalesExcludingGst.Size = new Size(0, 15);
+            AverageCarSalesExcludingGst.Size = new Size(34, 15);
             AverageCarSalesExcludingGst.TabIndex = 19;
+            AverageCarSalesExcludingGst.Text = "$0.00";
             // 
             // carErrorProvider
             // 
@@ -249,7 +251,7 @@
             // label12
             // 
             label12.AutoSize = true;
-            label12.Location = new Point(362, 351);
+            label12.Location = new Point(356, 351);
             label12.Name = "label12";
             label12.Size = new Size(200, 15);
             label12.TabIndex = 20;
@@ -261,9 +263,9 @@
             TaxRate.BackColor = SystemColors.Control;
             TaxRate.Location = new Point(568, 351);
             TaxRate.Name = "TaxRate";
-            TaxRate.Size = new Size(35, 15);
+            TaxRate.Size = new Size(34, 15);
             TaxRate.TabIndex = 21;
-            TaxRate.Text = "oooo";
+            TaxRate.Text = "$0.00";
             // 
             // CarListForm
             // 
@@ -295,7 +297,6 @@
             Controls.Add(CarList);
             Name = "CarListForm";
             Text = "CarListForm";
-            Load += CarListForm_Load;
             ((System.ComponentModel.ISupportInitialize)carErrorProvider).EndInit();
             ResumeLayout(false);
             PerformLayout();

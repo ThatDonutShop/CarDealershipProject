@@ -1,23 +1,24 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿
 namespace CarDealership.Core
 {
     public static class TaxRates
     {
-        public static decimal Search(IEnumerable<Car> cars)
+        public static double Search(IEnumerable<Car> cars)
         {
-            var totalPrice = decimal.Zero;
+            double[] taxRates = { 0.0, 0.17, 0.19, 0.21, 0.25, 0.30 };
+            decimal[] priceRanges = { 20000m, 35000m, 45000m, 60000m, 80000m };
 
-            foreach (var car in cars)
+            var totalPrice = cars.Select(car => car.Price).Sum();
+
+            for (int i = 1; i < priceRanges.Length; i++)
             {
-                totalPrice += car.Price;
+                if (totalPrice <= priceRanges[i])
+                {
+                    return taxRates[i];
+                }
             }
 
-            return totalPrice;
+            return taxRates[taxRates.Length - 1];
         }
     }
 }

@@ -1,4 +1,5 @@
 using CarDealership.Core;
+using System.Diagnostics;
 using System.Text.RegularExpressions;
 
 namespace CarDealership.WinForms
@@ -33,6 +34,13 @@ namespace CarDealership.WinForms
                 ClearInputs();
             }
         }
+        private void ClearList_Click(object sender, EventArgs e)
+        {
+            CarList.Items.Clear();
+
+            ShowSaleStatistics();
+            CalculateTaxRate();
+        }
 
         private void CalculateTaxRate()
         {
@@ -43,16 +51,8 @@ namespace CarDealership.WinForms
         private void ShowSaleStatistics()
         {
             var cars = CarList.Items.OfType<Car>();
-            AverageCarSalesIncludingGst.Text = CarSales.GetAverageCarSalePriceIncludingGst(cars).ToString("C");
-            AverageCarSalesExcludingGst.Text = CarSales.GetAverageCarSalePriceExcludingGst(cars).ToString("C");
-        }
-
-        private void ClearList_Click(object sender, EventArgs e)
-        {
-            CarList.Items.Clear();
-
-            AverageCarSalesIncludingGst.Text = string.Empty;
-            AverageCarSalesExcludingGst.Text = string.Empty;
+            AverageCarSalesIncludingGst.Text = Sales.GetAverageCarSalePriceIncludingGst(cars).ToString("C");
+            AverageCarSalesExcludingGst.Text = Sales.GetAverageCarSalePriceExcludingGst(cars).ToString("C");
         }
 
         private void ValidateNotEmpty(object sender, System.ComponentModel.CancelEventArgs e)
@@ -120,11 +120,6 @@ namespace CarDealership.WinForms
                 e.Cancel = true;
                 carErrorProvider.SetError(input, "Only a valid price is allowed. Example 9,000");
             }
-        }
-
-        private void CarListForm_Load(object sender, EventArgs e)
-        {
-
         }
     }
 }
