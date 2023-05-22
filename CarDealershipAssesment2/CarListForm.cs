@@ -20,7 +20,7 @@ namespace CarDealership.WinForms
 
         private void AddToList_OnClick(object sender, EventArgs e)
         {
-            if (this.ValidateChildren())
+            if (ValidateChildren())
             {
                 var year = int.Parse(Year.Text);
                 var price = decimal.Parse(Price.Text);
@@ -29,9 +29,15 @@ namespace CarDealership.WinForms
                 CarList.Items.Add(car);
 
                 ShowSaleStatistics();
-
+                CalculateTaxRate();
                 ClearInputs();
             }
+        }
+
+        private void CalculateTaxRate()
+        {
+            var taxRate = TaxRates.Search(CarList.Items.OfType<Car>());
+            TaxRate.Text = taxRate.ToString("C");
         }
 
         private void ShowSaleStatistics()
@@ -114,6 +120,11 @@ namespace CarDealership.WinForms
                 e.Cancel = true;
                 carErrorProvider.SetError(input, "Only a valid price is allowed. Example 9,000");
             }
+        }
+
+        private void CarListForm_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

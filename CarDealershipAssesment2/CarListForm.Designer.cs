@@ -50,6 +50,8 @@
             label11 = new Label();
             AverageCarSalesExcludingGst = new Label();
             carErrorProvider = new ErrorProvider(components);
+            label12 = new Label();
+            TaxRate = new Label();
             ((System.ComponentModel.ISupportInitialize)carErrorProvider).BeginInit();
             SuspendLayout();
             // 
@@ -244,12 +246,33 @@
             carErrorProvider.BlinkStyle = ErrorBlinkStyle.NeverBlink;
             carErrorProvider.ContainerControl = this;
             // 
+            // label12
+            // 
+            label12.AutoSize = true;
+            label12.Location = new Point(362, 351);
+            label12.Name = "label12";
+            label12.Size = new Size(200, 15);
+            label12.TabIndex = 20;
+            label12.Text = "Tax rate for total car prices (excl GST)";
+            // 
+            // TaxRate
+            // 
+            TaxRate.AutoSize = true;
+            TaxRate.BackColor = SystemColors.Control;
+            TaxRate.Location = new Point(568, 351);
+            TaxRate.Name = "TaxRate";
+            TaxRate.Size = new Size(35, 15);
+            TaxRate.TabIndex = 21;
+            TaxRate.Text = "oooo";
+            // 
             // CarListForm
             // 
             AcceptButton = AddToList;
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(828, 450);
+            Controls.Add(TaxRate);
+            Controls.Add(label12);
             Controls.Add(AverageCarSalesExcludingGst);
             Controls.Add(label11);
             Controls.Add(AverageCarSalesIncludingGst);
@@ -272,6 +295,7 @@
             Controls.Add(CarList);
             Name = "CarListForm";
             Text = "CarListForm";
+            Load += CarListForm_Load;
             ((System.ComponentModel.ISupportInitialize)carErrorProvider).EndInit();
             ResumeLayout(false);
             PerformLayout();
@@ -300,5 +324,7 @@
         private Label label11;
         private Label AverageCarSalesExcludingGst;
         private ErrorProvider carErrorProvider;
+        private Label label12;
+        private Label TaxRate;
     }
 }
