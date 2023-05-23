@@ -1,5 +1,4 @@
 using CarDealership.Core;
-using System.Diagnostics;
 using System.Text.RegularExpressions;
 
 namespace CarDealership.WinForms
