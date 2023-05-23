@@ -7,7 +7,12 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CarDealership.WinForms", "C
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CarDealership.Core", "CarDealership.Core\CarDealership.Core.csproj", "{1895BC41-9458-4B07-9175-37A956E7E573}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CarDealership.Core.Tests", "CarDealership.Core.Tests\CarDealership.Core.Tests.csproj", "{3698DFB2-AFFD-4989-A852-E41328645430}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CarDealership.Core.Tests", "CarDealership.Core.Tests\CarDealership.Core.Tests.csproj", "{3698DFB2-AFFD-4989-A852-E41328645430}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{60880D68-F29F-4B91-A375-AEAADB941214}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

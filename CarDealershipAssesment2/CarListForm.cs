@@ -1,4 +1,5 @@
 using CarDealership.Core;
+using System.Reflection;
 using System.Text.RegularExpressions;
 
 namespace CarDealership.WinForms
@@ -29,29 +30,24 @@ namespace CarDealership.WinForms
                 CarList.Items.Add(car);
 
                 ShowSaleStatistics();
-                CalculateTaxRate();
                 ClearInputs();
             }
         }
+
         private void ClearList_Click(object sender, EventArgs e)
         {
             CarList.Items.Clear();
 
             ShowSaleStatistics();
-            CalculateTaxRate();
         }
 
-        private void CalculateTaxRate()
-        {
-            var cars = CarList.Items.OfType<Car>();
-            TaxPayment.Text = Sales.GetTaxPayment(cars).ToString("C");
-        }
 
         private void ShowSaleStatistics()
         {
             var cars = CarList.Items.OfType<Car>();
             AverageCarSalesIncludingGst.Text = Sales.GetAverageCarSalePriceIncludingGst(cars).ToString("C");
             AverageCarSalesExcludingGst.Text = Sales.GetAverageCarSalePriceExcludingGst(cars).ToString("C");
+            TaxPayment.Text = Sales.GetTaxPayment(cars).ToString("C");
         }
 
         private void ValidateNotEmpty(object sender, System.ComponentModel.CancelEventArgs e)
@@ -119,6 +115,37 @@ namespace CarDealership.WinForms
                 e.Cancel = true;
                 carErrorProvider.SetError(input, "Only a valid price is allowed. Example 9,000");
             }
+        }
+
+        private async void SaveFile_Click(object sender, EventArgs e)
+        {
+            var cars = CarList.Items.OfType<Car>();
+
+            if (cars.Any())
+            {
+                var saved = await FileManager.Save(cars);
+
+                if (saved)
+                {
+                    MessageBox.Show("Saved cars", "Saved", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                else
+                {
+                    MessageBox.Show("Unable to save cars", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+        }
+
+        private async void LoadFile_Click(object sender, EventArgs e)
+        {
+            CarList.Items.Clear();
+            
+            foreach (var car in await FileManager.Load())
+            {
+                CarList.Items.Add(car);
+            }
+
+            ShowSaleStatistics();
         }
     }
 }

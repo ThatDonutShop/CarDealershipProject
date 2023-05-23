@@ -1,6 +1,7 @@
 ﻿
 namespace CarDealership.Core
 {
+    [Serializable]
     public sealed class Car
     {
         private const int Gst = 15;
@@ -22,20 +23,20 @@ namespace CarDealership.Core
             }
         }
 
-        public override string ToString()
-        {
-            return $"{Make,-15} {Model,-10} {Year,-10} {Price,-10:C} {TotalPrice :C}";
-        }
-
         public static Car Create(string make, string model, int year, decimal price)
         {
-            return new Car 
+            return new Car
             {
                 Make = make,
                 Model = model,
                 Year = year,
                 Price = price
             };
+        }
+
+        public override string ToString()
+        {
+            return $"{Make,-15} {Model,-10} {Year,-10} {Price,-10:C} {TotalPrice :C}";
         }
 
         private static decimal CalculateGst(decimal amount)

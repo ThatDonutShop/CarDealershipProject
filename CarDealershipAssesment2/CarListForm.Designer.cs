@@ -52,6 +52,8 @@
             carErrorProvider = new ErrorProvider(components);
             label12 = new Label();
             TaxPayment = new Label();
+            SaveFile = new Button();
+            LoadFile = new Button();
             ((System.ComponentModel.ISupportInitialize)carErrorProvider).BeginInit();
             SuspendLayout();
             // 
@@ -267,12 +269,34 @@
             TaxPayment.TabIndex = 21;
             TaxPayment.Text = "$0.00";
             // 
+            // SaveFile
+            // 
+            SaveFile.Location = new Point(686, 328);
+            SaveFile.Name = "SaveFile";
+            SaveFile.Size = new Size(75, 23);
+            SaveFile.TabIndex = 22;
+            SaveFile.Text = "Save file";
+            SaveFile.UseVisualStyleBackColor = true;
+            SaveFile.Click += SaveFile_Click;
+            // 
+            // LoadFile
+            // 
+            LoadFile.Location = new Point(686, 357);
+            LoadFile.Name = "LoadFile";
+            LoadFile.Size = new Size(75, 23);
+            LoadFile.TabIndex = 23;
+            LoadFile.Text = "Load file";
+            LoadFile.UseVisualStyleBackColor = true;
+            LoadFile.Click += LoadFile_Click;
+            // 
             // CarListForm
             // 
             AcceptButton = AddToList;
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(828, 450);
+            Controls.Add(LoadFile);
+            Controls.Add(SaveFile);
             Controls.Add(TaxPayment);
             Controls.Add(label12);
             Controls.Add(AverageCarSalesExcludingGst);
@@ -327,5 +351,7 @@
         private ErrorProvider carErrorProvider;
         private Label label12;
         private Label TaxPayment;
+        private Button SaveFile;
+        private Button LoadFile;
     }
 }
