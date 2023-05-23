@@ -43,8 +43,8 @@ namespace CarDealership.WinForms
 
         private void CalculateTaxRate()
         {
-            var taxRate = TaxRates.Search(CarList.Items.OfType<Car>());
-            TaxRate.Text = taxRate.ToString("C");
+            var cars = CarList.Items.OfType<Car>();
+            TaxPayment.Text = Sales.GetTaxPayment(cars).ToString("C");
         }
 
         private void ShowSaleStatistics()

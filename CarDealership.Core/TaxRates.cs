@@ -2,22 +2,10 @@
 namespace CarDealership.Core
 {
     public static class TaxRates
-    {
-        public static double Search(IEnumerable<Car> cars)
+    {     
+        public static decimal TaxRateSearching(decimal totalPrice)
         {
-            decimal totalPrice = decimal.Zero;
-            
-            foreach (var car in cars)
-            {
-                totalPrice += car.Price;
-            }
-
-            return TaxRateSearching(totalPrice);
-        }
-
-        private static double TaxRateSearching(decimal totalPrice)
-        {
-            double[] taxRates = { 0.0, 0.17, 0.19, 0.21, 0.25, 0.30 };
+            decimal[] taxRates = { 0.0m, 0.17m, 0.19m, 0.21m, 0.25m, 0.30m };
             decimal[] priceRanges = { 20000m, 35000m, 45000m, 60000m, 80000m };
 
             for (int i = 0; i < priceRanges.Length; i++)
