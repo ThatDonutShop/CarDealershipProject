@@ -1,4 +1,5 @@
 using CarDealership.Core;
+using System.ComponentModel.DataAnnotations;
 using System.Reflection;
 using System.Text.RegularExpressions;
 
@@ -157,30 +158,63 @@ namespace CarDealership.WinForms
             var cars = CarList.Items.OfType<Car>();
             IEnumerable<Car> filteredCars = Enumerable.Empty<Car>();
 
-            switch (SearchBy.SelectedText)
+            switch (SearchBy.SelectedItem)
             {
-                case "Make":
-                    filteredCars = Filter.SearchByCarMake(cars, "ford");
+                case "Year":
+                    filteredCars = Filter.SearchForCarsSinceTheYear(cars, SearchByYear.Value.Year);
                     break;
 
                 case "Make And Price":
-                    filteredCars = Filter.SearchByCarMakeAndPriceRange(cars, "ford", 2, 3);
-                    break;
-
-                case "Price":
-                    break;
-
-                case "Year":
-
+                    filteredCars = Filter.SearchByCarMakeAndPriceRange(
+                        cars,
+                        SearchByMake.Text,
+                        SearchByPriceFrom.Value,
+                        SearchByPriceTo.Value);
                     break;
             }
-            
+
             ClearCarList();
-            
+
             foreach (var car in filteredCars)
             {
                 CarList.Items.Add(car);
             }
+
+            if (CarList.Items.Count == 0) 
+            {
+                MessageBox.Show("No search results found");
+            }
+        }
+
+        private void ConfigureSearchForm()
+        {
+            switch (SearchBy.SelectedItem)
+            {
+                case "Make And Price":
+                    MakeAndPriceRangePanel.Visible = true;
+                    SearchByYearPanel.Visible = false;
+                    break;
+
+                case "Year":
+                    SearchByYearPanel.Visible = true;
+                    MakeAndPriceRangePanel.Visible = false;
+                    break;
+
+                default:
+                    SearchByYearPanel.Visible = false;
+                    MakeAndPriceRangePanel.Visible = false;
+                    break;
+            }
+        }
+
+        private void SearchBy_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            ConfigureSearchForm();
+        }
+
+        private void CarListForm_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

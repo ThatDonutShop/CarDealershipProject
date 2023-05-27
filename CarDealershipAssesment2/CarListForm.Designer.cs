@@ -56,7 +56,21 @@
             LoadFile = new Button();
             Search = new Button();
             SearchBy = new ComboBox();
+            SearchByMake = new TextBox();
+            SearchByPriceFrom = new NumericUpDown();
+            SearchByPriceTo = new NumericUpDown();
+            label13 = new Label();
+            label14 = new Label();
+            label15 = new Label();
+            MakeAndPriceRangePanel = new Panel();
+            SearchByYearPanel = new Panel();
+            SearchByYear = new DateTimePicker();
+            label16 = new Label();
             ((System.ComponentModel.ISupportInitialize)carErrorProvider).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)SearchByPriceFrom).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)SearchByPriceTo).BeginInit();
+            MakeAndPriceRangePanel.SuspendLayout();
+            SearchByYearPanel.SuspendLayout();
             SuspendLayout();
             // 
             // CarList
@@ -293,7 +307,7 @@
             // 
             // Search
             // 
-            Search.Location = new Point(234, 358);
+            Search.Location = new Point(234, 304);
             Search.Name = "Search";
             Search.Size = new Size(75, 23);
             Search.TabIndex = 24;
@@ -304,18 +318,111 @@
             // SearchBy
             // 
             SearchBy.FormattingEnabled = true;
-            SearchBy.Items.AddRange(new object[] { "Make", "Make And Price", "Price", "Year" });
-            SearchBy.Location = new Point(107, 358);
+            SearchBy.Items.AddRange(new object[] { "Make And Price", "Year" });
+            SearchBy.Location = new Point(107, 304);
             SearchBy.Name = "SearchBy";
             SearchBy.Size = new Size(121, 23);
             SearchBy.TabIndex = 25;
+            SearchBy.SelectedIndexChanged += SearchBy_SelectedIndexChanged;
+            // 
+            // SearchByMake
+            // 
+            SearchByMake.Location = new Point(76, 13);
+            SearchByMake.Name = "SearchByMake";
+            SearchByMake.Size = new Size(121, 23);
+            SearchByMake.TabIndex = 26;
+            // 
+            // SearchByPriceFrom
+            // 
+            SearchByPriceFrom.Location = new Point(76, 42);
+            SearchByPriceFrom.Name = "SearchByPriceFrom";
+            SearchByPriceFrom.Size = new Size(88, 23);
+            SearchByPriceFrom.TabIndex = 27;
+            // 
+            // SearchByPriceTo
+            // 
+            SearchByPriceTo.Location = new Point(76, 71);
+            SearchByPriceTo.Name = "SearchByPriceTo";
+            SearchByPriceTo.Size = new Size(88, 23);
+            SearchByPriceTo.TabIndex = 28;
+            // 
+            // label13
+            // 
+            label13.AutoSize = true;
+            label13.Location = new Point(13, 21);
+            label13.Name = "label13";
+            label13.Size = new Size(42, 15);
+            label13.TabIndex = 29;
+            label13.Text = "Make: ";
+            // 
+            // label14
+            // 
+            label14.AutoSize = true;
+            label14.Location = new Point(12, 73);
+            label14.Name = "label14";
+            label14.Size = new Size(50, 15);
+            label14.TabIndex = 30;
+            label14.Text = "Price to:";
+            // 
+            // label15
+            // 
+            label15.AutoSize = true;
+            label15.Location = new Point(5, 50);
+            label15.Name = "label15";
+            label15.Size = new Size(65, 15);
+            label15.TabIndex = 31;
+            label15.Text = "Price from:";
+            // 
+            // MakeAndPriceRangePanel
+            // 
+            MakeAndPriceRangePanel.Controls.Add(SearchByMake);
+            MakeAndPriceRangePanel.Controls.Add(label15);
+            MakeAndPriceRangePanel.Controls.Add(SearchByPriceFrom);
+            MakeAndPriceRangePanel.Controls.Add(label14);
+            MakeAndPriceRangePanel.Controls.Add(SearchByPriceTo);
+            MakeAndPriceRangePanel.Controls.Add(label13);
+            MakeAndPriceRangePanel.Location = new Point(91, 328);
+            MakeAndPriceRangePanel.Name = "MakeAndPriceRangePanel";
+            MakeAndPriceRangePanel.Size = new Size(218, 100);
+            MakeAndPriceRangePanel.TabIndex = 32;
+            MakeAndPriceRangePanel.Visible = false;
+            // 
+            // SearchByYearPanel
+            // 
+            SearchByYearPanel.Controls.Add(SearchByYear);
+            SearchByYearPanel.Controls.Add(label16);
+            SearchByYearPanel.Location = new Point(91, 327);
+            SearchByYearPanel.Name = "SearchByYearPanel";
+            SearchByYearPanel.Size = new Size(218, 100);
+            SearchByYearPanel.TabIndex = 33;
+            SearchByYearPanel.Visible = false;
+            // 
+            // SearchByYear
+            // 
+            SearchByYear.CustomFormat = "yyyy";
+            SearchByYear.Format = DateTimePickerFormat.Custom;
+            SearchByYear.Location = new Point(55, 10);
+            SearchByYear.Name = "SearchByYear";
+            SearchByYear.ShowUpDown = true;
+            SearchByYear.Size = new Size(86, 23);
+            SearchByYear.TabIndex = 2;
+            // 
+            // label16
+            // 
+            label16.AutoSize = true;
+            label16.Location = new Point(17, 13);
+            label16.Name = "label16";
+            label16.Size = new Size(32, 15);
+            label16.TabIndex = 0;
+            label16.Text = "Year:";
             // 
             // CarListForm
             // 
-            AcceptButton = AddToList;
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(828, 450);
+            Controls.Add(SearchByYearPanel);
+            Controls.Add(MakeAndPriceRangePanel);
             Controls.Add(SearchBy);
             Controls.Add(Search);
             Controls.Add(LoadFile);
@@ -344,7 +451,14 @@
             Controls.Add(CarList);
             Name = "CarListForm";
             Text = "CarListForm";
+            Load += CarListForm_Load;
             ((System.ComponentModel.ISupportInitialize)carErrorProvider).EndInit();
+            ((System.ComponentModel.ISupportInitialize)SearchByPriceFrom).EndInit();
+            ((System.ComponentModel.ISupportInitialize)SearchByPriceTo).EndInit();
+            MakeAndPriceRangePanel.ResumeLayout(false);
+            MakeAndPriceRangePanel.PerformLayout();
+            SearchByYearPanel.ResumeLayout(false);
+            SearchByYearPanel.PerformLayout();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -378,5 +492,15 @@
         private Button LoadFile;
         private Button Search;
         private ComboBox SearchBy;
+        private Label label15;
+        private Label label14;
+        private Label label13;
+        private NumericUpDown SearchByPriceTo;
+        private NumericUpDown SearchByPriceFrom;
+        private TextBox SearchByMake;
+        private Panel MakeAndPriceRangePanel;
+        private Panel SearchByYearPanel;
+        private Label label16;
+        private DateTimePicker SearchByYear;
     }
 }
