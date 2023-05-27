@@ -156,12 +156,12 @@ namespace CarDealership.WinForms
         private void Search_Click(object sender, EventArgs e)
         {
             var cars = CarList.Items.OfType<Car>();
-            IEnumerable<Car> filteredCars = Enumerable.Empty<Car>();
+            var filteredCars = new List<Car>();
 
             switch (SearchBy.SelectedItem)
             {
                 case "Year":
-                    filteredCars = Filter.SearchForCarsSinceTheYear(cars, SearchByYear.Value.Year);
+                    filteredCars.AddRange(Filter.SearchForCarsSinceTheYear(cars, SearchByYear.Value.Year));
                     break;
 
                 case "Make And Price":
@@ -170,26 +170,28 @@ namespace CarDealership.WinForms
                     {
 
                     }
-                    
-                    filteredCars = Filter.SearchByCarMakeAndPriceRange(
+
+                    filteredCars.AddRange(Filter.SearchByCarMakeAndPriceRange(
                         cars,
                         SearchByMake.Text,
                         SearchByPriceFrom.Value,
-                        SearchByPriceTo.Value);
+                        SearchByPriceTo.Value));
 
                     break;
             }
 
-            ClearCarList();
-
-            foreach (var car in filteredCars)
-            {
-                CarList.Items.Add(car);
-            }
-
-            if (CarList.Items.Count == 0) 
+            if (filteredCars.Any() == false)
             {
                 MessageBox.Show("No search results found");
+            }
+            else
+            {
+                ClearCarList();
+
+                foreach (var car in filteredCars)
+                {
+                    CarList.Items.Add(car);
+                }
             }
         }
 
@@ -221,7 +223,7 @@ namespace CarDealership.WinForms
 
         private void CarListForm_Load(object sender, EventArgs e)
         {
-
+            SearchBy.SelectedIndex = 0;
         }
     }
 }
