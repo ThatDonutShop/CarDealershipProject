@@ -165,11 +165,18 @@ namespace CarDealership.WinForms
                     break;
 
                 case "Make And Price":
+
+                    if (SearchByMake.Text != string.Empty)
+                    {
+
+                    }
+                    
                     filteredCars = Filter.SearchByCarMakeAndPriceRange(
                         cars,
                         SearchByMake.Text,
                         SearchByPriceFrom.Value,
                         SearchByPriceTo.Value);
+
                     break;
             }
 
