@@ -36,11 +36,15 @@ namespace CarDealership.WinForms
 
         private void ClearList_Click(object sender, EventArgs e)
         {
+            ClearCarList();
+        }
+
+        private void ClearCarList()
+        {
             CarList.Items.Clear();
 
             ShowSaleStatistics();
         }
-
 
         private void ShowSaleStatistics()
         {
@@ -139,13 +143,44 @@ namespace CarDealership.WinForms
         private async void LoadFile_Click(object sender, EventArgs e)
         {
             CarList.Items.Clear();
-            
+
             foreach (var car in await FileManager.Load())
             {
                 CarList.Items.Add(car);
             }
 
             ShowSaleStatistics();
+        }
+
+        private void Search_Click(object sender, EventArgs e)
+        {
+            var cars = CarList.Items.OfType<Car>();
+            IEnumerable<Car> filteredCars = Enumerable.Empty<Car>();
+
+            switch (SearchBy.SelectedText)
+            {
+                case "Make":
+                    filteredCars = Filter.SearchByCarMake(cars, "ford");
+                    break;
+
+                case "Make And Price":
+                    filteredCars = Filter.SearchByCarMakeAndPriceRange(cars, "ford", 2, 3);
+                    break;
+
+                case "Price":
+                    break;
+
+                case "Year":
+
+                    break;
+            }
+            
+            ClearCarList();
+            
+            foreach (var car in filteredCars)
+            {
+                CarList.Items.Add(car);
+            }
         }
     }
 }

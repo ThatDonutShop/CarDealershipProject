@@ -54,6 +54,8 @@
             TaxPayment = new Label();
             SaveFile = new Button();
             LoadFile = new Button();
+            Search = new Button();
+            SearchBy = new ComboBox();
             ((System.ComponentModel.ISupportInitialize)carErrorProvider).BeginInit();
             SuspendLayout();
             // 
@@ -289,12 +291,33 @@
             LoadFile.UseVisualStyleBackColor = true;
             LoadFile.Click += LoadFile_Click;
             // 
+            // Search
+            // 
+            Search.Location = new Point(234, 358);
+            Search.Name = "Search";
+            Search.Size = new Size(75, 23);
+            Search.TabIndex = 24;
+            Search.Text = "Search";
+            Search.UseVisualStyleBackColor = true;
+            Search.Click += Search_Click;
+            // 
+            // SearchBy
+            // 
+            SearchBy.FormattingEnabled = true;
+            SearchBy.Items.AddRange(new object[] { "Make", "Make And Price", "Price", "Year" });
+            SearchBy.Location = new Point(107, 358);
+            SearchBy.Name = "SearchBy";
+            SearchBy.Size = new Size(121, 23);
+            SearchBy.TabIndex = 25;
+            // 
             // CarListForm
             // 
             AcceptButton = AddToList;
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(828, 450);
+            Controls.Add(SearchBy);
+            Controls.Add(Search);
             Controls.Add(LoadFile);
             Controls.Add(SaveFile);
             Controls.Add(TaxPayment);
@@ -353,5 +376,7 @@
         private Label TaxPayment;
         private Button SaveFile;
         private Button LoadFile;
+        private Button Search;
+        private ComboBox SearchBy;
     }
 }
