@@ -168,7 +168,6 @@ namespace CarDealership.WinForms
                     break;
 
                 case SearchType.MakeAndPriceRange:
-
                     filteredCars.AddRange(Filter.SearchBy(
                         cars,
                         SearchByMake.Text,

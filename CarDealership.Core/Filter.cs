@@ -26,6 +26,7 @@ namespace CarDealership.Core
                 return SearchByCarMakeAndPriceRange(cars, make, pricedFrom, pricedTo);
             }
 
+            // check if we search by price.. or by make only.
             if (pricedFrom > 0 || pricedTo > 0)
             {
                 return SearchForCarsWithInthePriceRange(cars, pricedFrom, pricedTo);
