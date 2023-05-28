@@ -380,17 +380,16 @@
             MakeAndPriceRangePanel.Controls.Add(label14);
             MakeAndPriceRangePanel.Controls.Add(SearchByPriceTo);
             MakeAndPriceRangePanel.Controls.Add(label13);
-            MakeAndPriceRangePanel.Location = new Point(91, 328);
+            MakeAndPriceRangePanel.Location = new Point(107, 338);
             MakeAndPriceRangePanel.Name = "MakeAndPriceRangePanel";
             MakeAndPriceRangePanel.Size = new Size(218, 100);
             MakeAndPriceRangePanel.TabIndex = 32;
-            MakeAndPriceRangePanel.Visible = false;
             // 
             // SearchByYearPanel
             // 
             SearchByYearPanel.Controls.Add(SearchByYear);
             SearchByYearPanel.Controls.Add(label16);
-            SearchByYearPanel.Location = new Point(91, 328);
+            SearchByYearPanel.Location = new Point(107, 335);
             SearchByYearPanel.Name = "SearchByYearPanel";
             SearchByYearPanel.Size = new Size(218, 100);
             SearchByYearPanel.TabIndex = 33;

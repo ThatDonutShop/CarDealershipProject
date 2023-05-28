@@ -197,23 +197,10 @@ namespace CarDealership.WinForms
 
         private void ConfigureSearchForm()
         {
-            switch (((SearchOption)SearchBy.SelectedItem).By)
-            {
-                case SearchType.MakeAndPriceRange:
-                    MakeAndPriceRangePanel.Visible = true;
-                    SearchByYearPanel.Visible = false;
-                    break;
+            var by = ((SearchOption)SearchBy.SelectedItem).By;
 
-                case SearchType.Year:
-                    SearchByYearPanel.Visible = true;
-                    MakeAndPriceRangePanel.Visible = false;
-                    break;
-
-                default:
-                    SearchByYearPanel.Visible = false;
-                    MakeAndPriceRangePanel.Visible = false;
-                    break;
-            }
+            SearchByYearPanel.Visible = by == SearchType.Year;
+            MakeAndPriceRangePanel.Visible = by == SearchType.MakeAndPriceRange;
         }
 
         private void SearchBy_SelectedIndexChanged(object sender, EventArgs e)
@@ -223,11 +210,20 @@ namespace CarDealership.WinForms
 
         private void CarListForm_Load(object sender, EventArgs e)
         {
-            SearchBy.DataSource = new List<SearchOption>       
+            SearchBy.DataSource = new List<SearchOption>
             {
                 new SearchOption("Make and Price", SearchType.MakeAndPriceRange),
                 new SearchOption("Year", SearchType.Year)
             };
+
+            SearchBy.SelectedIndex = 0;
+
+            SearchByPriceFrom.Maximum = decimal.MaxValue;
+            SearchByPriceFrom.Minimum = decimal.Zero;
+            SearchByPriceTo.Maximum = decimal.MaxValue;
+            SearchByPriceTo.Minimum = decimal.Zero;
+
+            ConfigureSearchForm();
         }
     }
 }
