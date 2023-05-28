@@ -1,4 +1,6 @@
 ﻿
+using System.Collections.Generic;
+
 namespace CarDealership.Core.Tests
 {
     public class SalesTests
