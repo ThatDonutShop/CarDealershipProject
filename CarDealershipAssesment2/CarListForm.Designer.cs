@@ -318,7 +318,6 @@
             // SearchBy
             // 
             SearchBy.FormattingEnabled = true;
-            SearchBy.Items.AddRange(new object[] { "Make And Price", "Year" });
             SearchBy.Location = new Point(107, 304);
             SearchBy.Name = "SearchBy";
             SearchBy.Size = new Size(121, 23);
@@ -349,7 +348,7 @@
             // label13
             // 
             label13.AutoSize = true;
-            label13.Location = new Point(13, 21);
+            label13.Location = new Point(28, 16);
             label13.Name = "label13";
             label13.Size = new Size(42, 15);
             label13.TabIndex = 29;
@@ -358,7 +357,7 @@
             // label14
             // 
             label14.AutoSize = true;
-            label14.Location = new Point(12, 73);
+            label14.Location = new Point(20, 73);
             label14.Name = "label14";
             label14.Size = new Size(50, 15);
             label14.TabIndex = 30;
@@ -367,7 +366,7 @@
             // label15
             // 
             label15.AutoSize = true;
-            label15.Location = new Point(5, 50);
+            label15.Location = new Point(5, 44);
             label15.Name = "label15";
             label15.Size = new Size(65, 15);
             label15.TabIndex = 31;
@@ -391,7 +390,7 @@
             // 
             SearchByYearPanel.Controls.Add(SearchByYear);
             SearchByYearPanel.Controls.Add(label16);
-            SearchByYearPanel.Location = new Point(91, 327);
+            SearchByYearPanel.Location = new Point(91, 328);
             SearchByYearPanel.Name = "SearchByYearPanel";
             SearchByYearPanel.Size = new Size(218, 100);
             SearchByYearPanel.TabIndex = 33;

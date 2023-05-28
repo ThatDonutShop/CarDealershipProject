@@ -158,13 +158,13 @@ namespace CarDealership.WinForms
             var cars = CarList.Items.OfType<Car>();
             var filteredCars = new List<Car>();
 
-            switch (SearchBy.SelectedItem)
+            switch (((SearchOption)SearchBy.SelectedItem).By)
             {
-                case "Year":
+                case SearchType.Year:
                     filteredCars.AddRange(Filter.SearchForCarsSinceTheYear(cars, SearchByYear.Value.Year));
                     break;
 
-                case "Make And Price":
+                case SearchType.MakeAndPriceRange:
 
                     if (SearchByMake.Text != string.Empty)
                     {
@@ -197,14 +197,14 @@ namespace CarDealership.WinForms
 
         private void ConfigureSearchForm()
         {
-            switch (SearchBy.SelectedItem)
+            switch (((SearchOption)SearchBy.SelectedItem).By)
             {
-                case "Make And Price":
+                case SearchType.MakeAndPriceRange:
                     MakeAndPriceRangePanel.Visible = true;
                     SearchByYearPanel.Visible = false;
                     break;
 
-                case "Year":
+                case SearchType.Year:
                     SearchByYearPanel.Visible = true;
                     MakeAndPriceRangePanel.Visible = false;
                     break;
@@ -223,7 +223,11 @@ namespace CarDealership.WinForms
 
         private void CarListForm_Load(object sender, EventArgs e)
         {
-            SearchBy.SelectedIndex = 0;
+            SearchBy.DataSource = new List<SearchOption>       
+            {
+                new SearchOption("Make and Price", SearchType.MakeAndPriceRange),
+                new SearchOption("Year", SearchType.Year)
+            };
         }
     }
 }

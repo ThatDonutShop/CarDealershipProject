@@ -24,7 +24,7 @@ namespace CarDealership.Core
 
             foreach (var car in cars)
             {
-                if (car.Year > year)
+                if (car.Year >= year)
                 {
                     foundCars.Add(car);
                 }
