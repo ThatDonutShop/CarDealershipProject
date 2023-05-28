@@ -3,6 +3,22 @@ namespace CarDealership.Core
 {
     public static class Filter
     {
+        public static IEnumerable<Car> SearchBy(IEnumerable<Car> cars, string make, decimal pricedFrom, decimal pricedTo)
+        {
+            // all params to search are provided.
+            if (string.IsNullOrWhiteSpace(make) == false && pricedFrom > 0 || pricedTo > 0)
+            {
+                return SearchByCarMakeAndPriceRange(cars, make, pricedFrom, pricedTo);
+            }
+
+            if (pricedFrom > 0 || pricedTo > 0)
+            {
+                return SearchForCarsWithInthePriceRange(cars, pricedFrom, pricedTo);
+            }
+
+            return SearchByCarMake(cars, make);
+        }
+
         public static IEnumerable<Car> SearchByCarMake(IEnumerable<Car> cars, string make)
         {
             var foundCars = new List<Car>();
@@ -46,23 +62,6 @@ namespace CarDealership.Core
             }
 
             return foundCars;
-        }
-
-        public static IEnumerable<Car> SearchBy(IEnumerable<Car> cars, string make, decimal pricedFrom, decimal pricedTo)
-        {
-            if (string.IsNullOrWhiteSpace(make))
-            {
-                if (pricedFrom > 0 || pricedTo > 0)
-                {
-                    return SearchForCarsWithInthePriceRange(cars, pricedFrom, pricedTo);
-                }
-            }
-            else if (string.IsNullOrWhiteSpace(make) == false)
-            {
-                return SearchByCarMake(cars, make);
-            }
-
-            return SearchByCarMakeAndPriceRange(cars, make, pricedFrom, pricedTo);
         }
 
         public static IEnumerable<Car> SearchByCarMakeAndPriceRange(IEnumerable<Car> cars, string make, decimal pricedFrom, decimal pricedTo)
