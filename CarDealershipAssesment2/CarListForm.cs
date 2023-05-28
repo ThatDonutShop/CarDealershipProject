@@ -161,17 +161,15 @@ namespace CarDealership.WinForms
             switch (((SearchOption)SearchBy.SelectedItem).By)
             {
                 case SearchType.Year:
-                    filteredCars.AddRange(Filter.SearchForCarsSinceTheYear(cars, SearchByYear.Value.Year));
+                    filteredCars.AddRange(Filter.SearchForCarsSinceTheYear(
+                        cars, 
+                        SearchByYear.Value.Year));
+
                     break;
 
                 case SearchType.MakeAndPriceRange:
 
-                    if (SearchByMake.Text != string.Empty)
-                    {
-
-                    }
-
-                    filteredCars.AddRange(Filter.SearchByCarMakeAndPriceRange(
+                    filteredCars.AddRange(Filter.SearchBy(
                         cars,
                         SearchByMake.Text,
                         SearchByPriceFrom.Value,

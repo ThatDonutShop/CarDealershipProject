@@ -39,7 +39,7 @@ namespace CarDealership.Core
 
             foreach (var car in cars)
             {
-                if (car.Price >= pricedFrom && car.Price <= pricedTo)
+                if ((pricedFrom == 0 || car.Price >= pricedFrom) && (pricedTo == 0 || car.Price <= pricedTo))
                 {
                     foundCars.Add(car);
                 }
@@ -48,8 +48,25 @@ namespace CarDealership.Core
             return foundCars;
         }
 
-        public static IEnumerable<Car> SearchByCarMakeAndPriceRange(IEnumerable<Car> cars, string make, decimal pricedFrom, decimal pricedTo)
+        public static IEnumerable<Car> SearchBy(IEnumerable<Car> cars, string make, decimal pricedFrom, decimal pricedTo)
         {
+            if (string.IsNullOrWhiteSpace(make))
+            {
+                if (pricedFrom > 0 || pricedTo > 0)
+                {
+                    return SearchForCarsWithInthePriceRange(cars, pricedFrom, pricedTo);
+                }
+            }
+            else if (string.IsNullOrWhiteSpace(make) == false)
+            {
+                return SearchByCarMake(cars, make);
+            }
+
+            return SearchByCarMakeAndPriceRange(cars, make, pricedFrom, pricedTo);
+        }
+
+        public static IEnumerable<Car> SearchByCarMakeAndPriceRange(IEnumerable<Car> cars, string make, decimal pricedFrom, decimal pricedTo)
+        {          
             var carsByMake = SearchByCarMake(cars, make);
             var carsByPriceRange = SearchForCarsWithInthePriceRange(carsByMake, pricedFrom, pricedTo);
             return carsByPriceRange;
