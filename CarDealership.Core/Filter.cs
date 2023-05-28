@@ -3,6 +3,21 @@ namespace CarDealership.Core
 {
     public static class Filter
     {
+        public static IEnumerable<Car> SearchForCarsSinceTheYear(IEnumerable<Car> cars, int year)
+        {
+            var foundCars = new List<Car>();
+
+            foreach (var car in cars)
+            {
+                if (car.Year >= year)
+                {
+                    foundCars.Add(car);
+                }
+            }
+
+            return foundCars;
+        }
+
         public static IEnumerable<Car> SearchBy(IEnumerable<Car> cars, string make, decimal pricedFrom, decimal pricedTo)
         {
             // all params to search are provided.
@@ -26,21 +41,6 @@ namespace CarDealership.Core
             foreach (var car in cars)
             {
                 if (car.Make.Contains(make, StringComparison.OrdinalIgnoreCase))
-                {
-                    foundCars.Add(car);
-                }
-            }
-
-            return foundCars;
-        }
-
-        public static IEnumerable<Car> SearchForCarsSinceTheYear(IEnumerable<Car> cars, int year)
-        {
-            var foundCars = new List<Car>();
-
-            foreach (var car in cars)
-            {
-                if (car.Year >= year)
                 {
                     foundCars.Add(car);
                 }
