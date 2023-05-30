@@ -5,7 +5,7 @@ namespace CarDealership.Core.Tests
     {
         [Theory]
         [InlineData(0, 0)]
-        [InlineData(19999, 0)]
+        [InlineData(19999, 0)]//price then expected tax percentage
         [InlineData(20000, 0.17)]
         [InlineData(34999, 0.17)]
         [InlineData(35000, 0.19)]
