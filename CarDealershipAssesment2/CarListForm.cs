@@ -70,12 +70,6 @@ namespace CarDealership.WinForms
             }
         }
 
-        /// <summary>
-        /// Validate the year of the car using a regular expression"
-        /// https://stackoverflow.com/questions/4374185/regular-expression-match-to-test-for-a-valid-year
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void ValidateYear(object sender, System.ComponentModel.CancelEventArgs e)
         {
             var input = (TextBox)sender;
