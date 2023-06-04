@@ -1,4 +1,5 @@
 using CarDealership.Core;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Reflection;
 using System.Text.RegularExpressions;
@@ -40,7 +41,7 @@ namespace CarDealership.WinForms
 
         private void AddToList_OnClick(object sender, EventArgs e)
         {
-            if (ValidatingAddToList())
+            if (ValidateCar())
             {
                 var year = int.Parse(Year.Text);
                 var price = decimal.Parse(Price.Text);
@@ -129,9 +130,14 @@ namespace CarDealership.WinForms
             }
         }
 
-        private bool ValidatingAddToList()
+        private bool ValidateCar()
         {
-            bool isValid = true;
+            var cancelArgs = new CancelEventArgs();
+
+            ValidateNotEmpty(Make, cancelArgs);
+            ValidateYear(Year, cancelArgs);
+
+            carErrorProvider.GetError(Make)
 
             if (string.IsNullOrWhiteSpace(Make.Text))
             {
@@ -174,6 +180,7 @@ namespace CarDealership.WinForms
             }
             return isValid;
         }
+
         private async void SaveFile_Click(object sender, EventArgs e)
         {
             var cars = CarList.Items.OfType<Car>();
