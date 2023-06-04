@@ -12,6 +12,23 @@ namespace CarDealership.WinForms
             InitializeComponent();
         }
 
+        private void CarListForm_Load(object sender, EventArgs e)
+        {
+            SearchBy.DataSource = new List<SearchOption>
+            {
+                new SearchOption("Make and Price", SearchType.MakeAndPriceRange),
+                new SearchOption("Year", SearchType.Year)
+            };
+
+            SearchBy.SelectedIndex = 0;
+
+            SearchByPriceFrom.Maximum = decimal.MaxValue;
+            SearchByPriceFrom.Minimum = decimal.Zero;
+            SearchByPriceTo.Maximum = decimal.MaxValue;
+            SearchByPriceTo.Minimum = decimal.Zero;
+
+            ConfigureSearchForm();
+        }
         private void ClearInputs()
         {
             Make.Text = string.Empty;
@@ -197,24 +214,6 @@ namespace CarDealership.WinForms
 
         private void SearchBy_SelectedIndexChanged(object sender, EventArgs e)
         {
-            ConfigureSearchForm();
-        }
-
-        private void CarListForm_Load(object sender, EventArgs e)
-        {
-            SearchBy.DataSource = new List<SearchOption>
-            {
-                new SearchOption("Make and Price", SearchType.MakeAndPriceRange),
-                new SearchOption("Year", SearchType.Year)
-            };
-
-            SearchBy.SelectedIndex = 0;
-
-            SearchByPriceFrom.Maximum = decimal.MaxValue;
-            SearchByPriceFrom.Minimum = decimal.Zero;
-            SearchByPriceTo.Maximum = decimal.MaxValue;
-            SearchByPriceTo.Minimum = decimal.Zero;
-
             ConfigureSearchForm();
         }
     }
