@@ -40,7 +40,7 @@ namespace CarDealership.WinForms
 
         private void AddToList_OnClick(object sender, EventArgs e)
         {
-            if (IsValidInput())
+            if (ValidatingAddToList())
             {
                 var year = int.Parse(Year.Text);
                 var price = decimal.Parse(Price.Text);
@@ -129,12 +129,7 @@ namespace CarDealership.WinForms
             }
         }
 
-        private void ValidatingAddToList(object sender, System.ComponentModel.CancelEventArgs e)
-        {
-            IsValidInput();
-        }
-
-        private bool IsValidInput()
+        private bool ValidatingAddToList()
         {
             bool isValid = true;
 

@@ -211,7 +211,6 @@
             AddToList.Text = "Add To List";
             AddToList.UseVisualStyleBackColor = true;
             AddToList.Click += AddToList_OnClick;
-            AddToList.Validating += ValidatingAddToList;
             // 
             // ClearList
             // 
