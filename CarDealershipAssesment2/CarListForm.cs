@@ -137,7 +137,7 @@ namespace CarDealership.WinForms
             ValidateNotEmpty(Make, cancelArgs);
             ValidateYear(Year, cancelArgs);
 
-            carErrorProvider.GetError(Make)
+            carErrorProvider.GetError(Make);
 
             if (string.IsNullOrWhiteSpace(Make.Text))
             {
