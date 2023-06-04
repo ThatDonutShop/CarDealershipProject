@@ -211,6 +211,7 @@
             AddToList.Text = "Add To List";
             AddToList.UseVisualStyleBackColor = true;
             AddToList.Click += AddToList_OnClick;
+            AddToList.Validating += ValidatingAddToList;
             // 
             // ClearList
             // 
@@ -334,6 +335,7 @@
             // SearchByPriceFrom
             // 
             SearchByPriceFrom.Location = new Point(76, 42);
+            SearchByPriceFrom.Maximum = new decimal(new int[] { 4000000, 0, 0, 0 });
             SearchByPriceFrom.Name = "SearchByPriceFrom";
             SearchByPriceFrom.Size = new Size(88, 23);
             SearchByPriceFrom.TabIndex = 27;
@@ -341,6 +343,7 @@
             // SearchByPriceTo
             // 
             SearchByPriceTo.Location = new Point(76, 71);
+            SearchByPriceTo.Maximum = new decimal(new int[] { 4000000, 0, 0, 0 });
             SearchByPriceTo.Name = "SearchByPriceTo";
             SearchByPriceTo.Size = new Size(88, 23);
             SearchByPriceTo.TabIndex = 28;
@@ -389,7 +392,7 @@
             // 
             SearchByYearPanel.Controls.Add(SearchByYear);
             SearchByYearPanel.Controls.Add(label16);
-            SearchByYearPanel.Location = new Point(107, 335);
+            SearchByYearPanel.Location = new Point(104, 338);
             SearchByYearPanel.Name = "SearchByYearPanel";
             SearchByYearPanel.Size = new Size(218, 100);
             SearchByYearPanel.TabIndex = 33;
@@ -400,6 +403,8 @@
             SearchByYear.CustomFormat = "yyyy";
             SearchByYear.Format = DateTimePickerFormat.Custom;
             SearchByYear.Location = new Point(55, 10);
+            SearchByYear.MaxDate = new DateTime(2023, 12, 31, 0, 0, 0, 0);
+            SearchByYear.MinDate = new DateTime(1900, 1, 1, 0, 0, 0, 0);
             SearchByYear.Name = "SearchByYear";
             SearchByYear.ShowUpDown = true;
             SearchByYear.Size = new Size(86, 23);

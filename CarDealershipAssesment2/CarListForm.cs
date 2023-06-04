@@ -2,6 +2,7 @@ using CarDealership.Core;
 using System.ComponentModel.DataAnnotations;
 using System.Reflection;
 using System.Text.RegularExpressions;
+using System.Windows.Forms;
 
 namespace CarDealership.WinForms
 {
@@ -39,7 +40,7 @@ namespace CarDealership.WinForms
 
         private void AddToList_OnClick(object sender, EventArgs e)
         {
-            if (ValidateChildren())
+            if (IsValidInput())
             {
                 var year = int.Parse(Year.Text);
                 var price = decimal.Parse(Price.Text);
@@ -79,7 +80,6 @@ namespace CarDealership.WinForms
             if (string.IsNullOrWhiteSpace(input.Text))
             {
                 carErrorProvider.SetError(input, "It can't be left empty");
-                e.Cancel = true;
             }
             else
             {
@@ -99,13 +99,11 @@ namespace CarDealership.WinForms
 
                 if (year > DateTime.Now.Year)
                 {
-                    e.Cancel = true;
                     carErrorProvider.SetError(Year, $"The year cannot be greater than {DateTime.Now.Year}");
                 }
             }
             else
             {
-                e.Cancel = true;
                 carErrorProvider.SetError(Year, "Only valid years are allowed. Example: 2023");
             }
         }
@@ -122,17 +120,65 @@ namespace CarDealership.WinForms
                 }
                 else
                 {
-                    e.Cancel = true;
                     carErrorProvider.SetError(input, "A price greater than zero is required.");
                 }
             }
             else
             {
-                e.Cancel = true;
                 carErrorProvider.SetError(input, "Only a valid price is allowed. Example 9,000");
             }
         }
 
+        private void ValidatingAddToList(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            IsValidInput();
+        }
+
+        private bool IsValidInput()
+        {
+            bool isValid = true;
+
+            if (string.IsNullOrWhiteSpace(Make.Text))
+            {
+                isValid = false;
+                carErrorProvider.SetError(Make, "Make can't be left empty");
+            }
+            else
+            {
+                carErrorProvider.SetError(Make, string.Empty);
+            }
+
+            if (string.IsNullOrWhiteSpace(Model.Text))
+            {
+                isValid = false;
+                carErrorProvider.SetError(Model, "Model can't be left empty");
+            }
+            else
+            {
+                carErrorProvider.SetError(Model, string.Empty);
+            }
+
+            if (!int.TryParse(Year.Text, out int year) || year < 1900 || year > DateTime.Now.Year)
+            {
+                isValid = false;
+                carErrorProvider.SetError(Year, $"Enter a valid year between 1900 and {DateTime.Now.Year}");
+            }
+            else
+            {
+                carErrorProvider.SetError(Year, string.Empty);
+            }
+
+            if (!decimal.TryParse(Price.Text, out decimal price) || price <= decimal.Zero)
+            {
+                isValid = false;
+                carErrorProvider.SetError(Price, "Enter a valid price greater than zero.");
+            }
+            else
+            {
+                carErrorProvider.SetError(Price, string.Empty);
+            }
+            return isValid;
+        }
         private async void SaveFile_Click(object sender, EventArgs e)
         {
             var cars = CarList.Items.OfType<Car>();
@@ -174,7 +220,7 @@ namespace CarDealership.WinForms
             {
                 case SearchType.Year:
                     filteredCars.AddRange(Filter.SearchForCarsSinceTheYear(
-                        cars, 
+                        cars,
                         SearchByYear.Value.Year));
 
                     break;
