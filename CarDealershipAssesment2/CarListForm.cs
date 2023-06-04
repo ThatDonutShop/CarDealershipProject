@@ -127,6 +127,7 @@ namespace CarDealership.WinForms
                 if (saved)
                 {
                     MessageBox.Show("Saved cars", "Saved", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    ClearCarList();
                 }
                 else
                 {
