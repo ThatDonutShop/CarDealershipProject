@@ -135,50 +135,11 @@ namespace CarDealership.WinForms
             var cancelArgs = new CancelEventArgs();
 
             ValidateNotEmpty(Make, cancelArgs);
+            ValidateNotEmpty(Model, cancelArgs);
             ValidateYear(Year, cancelArgs);
+            ValidatePrice(Price, cancelArgs);
 
-            carErrorProvider.GetError(Make);
-
-            if (string.IsNullOrWhiteSpace(Make.Text))
-            {
-                isValid = false;
-                carErrorProvider.SetError(Make, "Make can't be left empty");
-            }
-            else
-            {
-                carErrorProvider.SetError(Make, string.Empty);
-            }
-
-            if (string.IsNullOrWhiteSpace(Model.Text))
-            {
-                isValid = false;
-                carErrorProvider.SetError(Model, "Model can't be left empty");
-            }
-            else
-            {
-                carErrorProvider.SetError(Model, string.Empty);
-            }
-
-            if (!int.TryParse(Year.Text, out int year) || year < 1900 || year > DateTime.Now.Year)
-            {
-                isValid = false;
-                carErrorProvider.SetError(Year, $"Enter a valid year between 1900 and {DateTime.Now.Year}");
-            }
-            else
-            {
-                carErrorProvider.SetError(Year, string.Empty);
-            }
-
-            if (!decimal.TryParse(Price.Text, out decimal price) || price <= decimal.Zero)
-            {
-                isValid = false;
-                carErrorProvider.SetError(Price, "Enter a valid price greater than zero.");
-            }
-            else
-            {
-                carErrorProvider.SetError(Price, string.Empty);
-            }
-            return isValid;
+            return carErrorProvider.HasErrors == false;
         }
 
         private async void SaveFile_Click(object sender, EventArgs e)
