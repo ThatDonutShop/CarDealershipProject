@@ -407,7 +407,7 @@
             // 
             SearchByYearPanel.Controls.Add(SearchByYear);
             SearchByYearPanel.Controls.Add(label16);
-            SearchByYearPanel.Location = new Point(344, 338);
+            SearchByYearPanel.Location = new Point(338, 380);
             SearchByYearPanel.Name = "SearchByYearPanel";
             SearchByYearPanel.Size = new Size(218, 100);
             SearchByYearPanel.TabIndex = 33;
