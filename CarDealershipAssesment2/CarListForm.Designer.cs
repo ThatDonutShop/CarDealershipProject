@@ -63,6 +63,7 @@
             label14 = new Label();
             label15 = new Label();
             MakeAndPriceRangePanel = new Panel();
+            label17 = new Label();
             SearchByYearPanel = new Panel();
             SearchByYear = new DateTimePicker();
             label16 = new Label();
@@ -338,6 +339,7 @@
             SearchByPriceFrom.Name = "SearchByPriceFrom";
             SearchByPriceFrom.Size = new Size(88, 23);
             SearchByPriceFrom.TabIndex = 27;
+            SearchByPriceFrom.Validating += ValidatePriceFromSearch;
             // 
             // SearchByPriceTo
             // 
@@ -346,6 +348,7 @@
             SearchByPriceTo.Name = "SearchByPriceTo";
             SearchByPriceTo.Size = new Size(88, 23);
             SearchByPriceTo.TabIndex = 28;
+            SearchByPriceTo.Validating += ValidatePriceTo;
             // 
             // label13
             // 
@@ -376,6 +379,7 @@
             // 
             // MakeAndPriceRangePanel
             // 
+            MakeAndPriceRangePanel.Controls.Add(label17);
             MakeAndPriceRangePanel.Controls.Add(SearchByMake);
             MakeAndPriceRangePanel.Controls.Add(label15);
             MakeAndPriceRangePanel.Controls.Add(SearchByPriceFrom);
@@ -384,14 +388,22 @@
             MakeAndPriceRangePanel.Controls.Add(label13);
             MakeAndPriceRangePanel.Location = new Point(107, 338);
             MakeAndPriceRangePanel.Name = "MakeAndPriceRangePanel";
-            MakeAndPriceRangePanel.Size = new Size(218, 100);
+            MakeAndPriceRangePanel.Size = new Size(218, 179);
             MakeAndPriceRangePanel.TabIndex = 32;
+            // 
+            // label17
+            // 
+            label17.Location = new Point(7, 97);
+            label17.Name = "label17";
+            label17.Size = new Size(157, 76);
+            label17.TabIndex = 32;
+            label17.Text = "If you leave Price from and Price to at zero only make will be searched for. Vice versa";
             // 
             // SearchByYearPanel
             // 
             SearchByYearPanel.Controls.Add(SearchByYear);
             SearchByYearPanel.Controls.Add(label16);
-            SearchByYearPanel.Location = new Point(104, 338);
+            SearchByYearPanel.Location = new Point(344, 338);
             SearchByYearPanel.Name = "SearchByYearPanel";
             SearchByYearPanel.Size = new Size(218, 100);
             SearchByYearPanel.TabIndex = 33;
@@ -422,7 +434,7 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(828, 450);
+            ClientSize = new Size(828, 509);
             Controls.Add(SearchByYearPanel);
             Controls.Add(MakeAndPriceRangePanel);
             Controls.Add(SearchBy);
@@ -504,5 +516,6 @@
         private Panel SearchByYearPanel;
         private Label label16;
         private DateTimePicker SearchByYear;
+        private Label label17;
     }
 }

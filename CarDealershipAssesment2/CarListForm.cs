@@ -74,7 +74,7 @@ namespace CarDealership.WinForms
             TaxPayment.Text = Sales.GetTaxPayment(cars).ToString("C");
         }
 
-        private void ValidateNotEmpty(object sender, System.ComponentModel.CancelEventArgs e)
+        private void ValidateNotEmpty(object sender, CancelEventArgs e)
         {
             var input = (TextBox)sender;
 
@@ -88,7 +88,7 @@ namespace CarDealership.WinForms
             }
         }
 
-        private void ValidateYear(object sender, System.ComponentModel.CancelEventArgs e)
+        private void ValidateYear(object sender, CancelEventArgs e)
         {
             var input = (TextBox)sender;
 
@@ -109,7 +109,7 @@ namespace CarDealership.WinForms
             }
         }
 
-        private void ValidatePrice(object sender, System.ComponentModel.CancelEventArgs e)
+        private void ValidatePrice(object sender, CancelEventArgs e)
         {
             var input = (TextBox)sender;
 
@@ -198,17 +198,20 @@ namespace CarDealership.WinForms
                     break;
             }
 
-            if (filteredCars.Any() == false)
+            if (ValidateSearch())
             {
-                MessageBox.Show("No search results found");
-            }
-            else
-            {
-                ClearCarList();
-
-                foreach (var car in filteredCars)
+                if (filteredCars.Any() == false)
                 {
-                    CarList.Items.Add(car);
+                    MessageBox.Show("No search results found");
+                }
+                else
+                {
+                    ClearCarList();
+
+                    foreach (var car in filteredCars)
+                    {
+                        CarList.Items.Add(car);
+                    }
                 }
             }
         }
@@ -224,6 +227,58 @@ namespace CarDealership.WinForms
         private void SearchBy_SelectedIndexChanged(object sender, EventArgs e)
         {
             ConfigureSearchForm();
+        }
+
+        private void ValidatePriceFromSearch(object sender, CancelEventArgs e)
+        {
+            var input = (NumericUpDown)sender;
+
+            if (decimal.TryParse(input.Text, out decimal PriceFrom))
+            {
+                if (PriceFrom < decimal.Zero)
+                {
+                    carErrorProvider.SetError(input, string.Empty);
+                }
+                else
+                {
+                    carErrorProvider.SetError(input, "A price less than zero is not accepted.");
+                }
+            }
+            else
+            {
+                carErrorProvider.SetError(input, "Only a valid price is allowed. Example 9,000");
+            }
+        }
+
+        private void ValidatePriceTo(object sender, CancelEventArgs e)
+        {
+            var input = (TextBox)sender;
+
+            if (decimal.TryParse(input.Text, out decimal PriceTo))
+            {
+                if (PriceTo < decimal.Zero)
+                {
+                    carErrorProvider.SetError(input, string.Empty);
+                }
+                else
+                {
+                    carErrorProvider.SetError(input, "A price less than zero is not accepted.");
+                }
+            }
+            else
+            {
+                carErrorProvider.SetError(input, "Only a valid price is allowed. Example 9,000");
+            }
+        }
+
+        private bool ValidateSearch()
+        {
+            var cancelArgs = new CancelEventArgs();
+
+            ValidatePriceFromSearch(SearchByPriceFrom, cancelArgs);
+            ValidatePriceTo(SearchByPriceTo, cancelArgs);
+
+            return carErrorProvider.HasErrors == false;
         }
     }
 }
