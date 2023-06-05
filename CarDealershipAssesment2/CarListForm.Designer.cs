@@ -67,11 +67,15 @@
             SearchByYearPanel = new Panel();
             SearchByYear = new DateTimePicker();
             label16 = new Label();
+            errorProvider1 = new ErrorProvider(components);
+            searchErrorProvider = new ErrorProvider(components);
             ((System.ComponentModel.ISupportInitialize)carErrorProvider).BeginInit();
             ((System.ComponentModel.ISupportInitialize)SearchByPriceFrom).BeginInit();
             ((System.ComponentModel.ISupportInitialize)SearchByPriceTo).BeginInit();
             MakeAndPriceRangePanel.SuspendLayout();
             SearchByYearPanel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)errorProvider1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)searchErrorProvider).BeginInit();
             SuspendLayout();
             // 
             // CarList
@@ -430,6 +434,17 @@
             label16.TabIndex = 0;
             label16.Text = "Year:";
             // 
+            // errorProvider1
+            // 
+            errorProvider1.BlinkStyle = ErrorBlinkStyle.NeverBlink;
+            errorProvider1.ContainerControl = this;
+            // 
+            // searchErrorProvider
+            // 
+            searchErrorProvider.BlinkRate = 0;
+            searchErrorProvider.BlinkStyle = ErrorBlinkStyle.NeverBlink;
+            searchErrorProvider.ContainerControl = this;
+            // 
             // CarListForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -473,6 +488,8 @@
             MakeAndPriceRangePanel.PerformLayout();
             SearchByYearPanel.ResumeLayout(false);
             SearchByYearPanel.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)errorProvider1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)searchErrorProvider).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -517,5 +534,7 @@
         private Label label16;
         private DateTimePicker SearchByYear;
         private Label label17;
+        private ErrorProvider errorProvider1;
+        private ErrorProvider searchErrorProvider;
     }
 }

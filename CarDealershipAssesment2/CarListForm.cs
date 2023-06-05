@@ -237,37 +237,37 @@ namespace CarDealership.WinForms
             {
                 if (PriceFrom < decimal.Zero)
                 {
-                    carErrorProvider.SetError(input, string.Empty);
+                    searchErrorProvider.SetError(input, string.Empty);
                 }
                 else
                 {
-                    carErrorProvider.SetError(input, "A price less than zero is not accepted.");
+                    searchErrorProvider.SetError(input, "A price less than zero is not accepted.");
                 }
             }
             else
             {
-                carErrorProvider.SetError(input, "Only a valid price is allowed. Example 9,000");
+                searchErrorProvider.SetError(input, "Only a valid price is allowed. Example 9,000");
             }
         }
 
         private void ValidatePriceTo(object sender, CancelEventArgs e)
         {
-            var input = (TextBox)sender;
+            var input = (NumericUpDown)sender;
 
             if (decimal.TryParse(input.Text, out decimal PriceTo))
             {
                 if (PriceTo < decimal.Zero)
                 {
-                    carErrorProvider.SetError(input, string.Empty);
+                    searchErrorProvider.SetError(input, string.Empty);
                 }
                 else
                 {
-                    carErrorProvider.SetError(input, "A price less than zero is not accepted.");
+                    searchErrorProvider.SetError(input, "A price less than zero is not accepted.");
                 }
             }
             else
             {
-                carErrorProvider.SetError(input, "Only a valid price is allowed. Example 9,000");
+                searchErrorProvider.SetError(input, "Only a valid price is allowed. Example 9,000");
             }
         }
 
