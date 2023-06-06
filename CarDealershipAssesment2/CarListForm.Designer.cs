@@ -61,11 +61,11 @@
             label14 = new Label();
             label15 = new Label();
             MakeAndPriceRangePanel = new Panel();
-            SearchPriceFrom = new TextBox();
-            SearchPriceTo = new TextBox();
             SearchByYearPanel = new Panel();
             SearchByYear = new TextBox();
             label16 = new Label();
+            SearchPriceFrom = new TextBox();
+            SearchPriceTo = new TextBox();
             errorProvider1 = new ErrorProvider(components);
             searchErrorProvider = new ErrorProvider(components);
             ((System.ComponentModel.ISupportInitialize)carErrorProvider).BeginInit();
@@ -370,30 +370,14 @@
             MakeAndPriceRangePanel.Controls.Add(label13);
             MakeAndPriceRangePanel.Location = new Point(107, 338);
             MakeAndPriceRangePanel.Name = "MakeAndPriceRangePanel";
-            MakeAndPriceRangePanel.Size = new Size(267, 108);
+            MakeAndPriceRangePanel.Size = new Size(232, 134);
             MakeAndPriceRangePanel.TabIndex = 32;
-            // 
-            // SearchPriceFrom
-            // 
-            SearchPriceFrom.Location = new Point(76, 42);
-            SearchPriceFrom.Name = "SearchPriceFrom";
-            SearchPriceFrom.Size = new Size(121, 23);
-            SearchPriceFrom.TabIndex = 33;
-            SearchPriceFrom.Validating += ValidateSearchingPrice;
-            // 
-            // SearchPriceTo
-            // 
-            SearchPriceTo.Location = new Point(76, 72);
-            SearchPriceTo.Name = "SearchPriceTo";
-            SearchPriceTo.Size = new Size(121, 23);
-            SearchPriceTo.TabIndex = 32;
-            SearchPriceTo.Validating += ValidateSearchingPrice;
             // 
             // SearchByYearPanel
             // 
             SearchByYearPanel.Controls.Add(SearchByYear);
             SearchByYearPanel.Controls.Add(label16);
-            SearchByYearPanel.Location = new Point(107, 346);
+            SearchByYearPanel.Location = new Point(107, 341);
             SearchByYearPanel.Name = "SearchByYearPanel";
             SearchByYearPanel.Size = new Size(218, 100);
             SearchByYearPanel.TabIndex = 33;
@@ -415,6 +399,22 @@
             label16.Size = new Size(32, 15);
             label16.TabIndex = 0;
             label16.Text = "Year:";
+            // 
+            // SearchPriceFrom
+            // 
+            SearchPriceFrom.Location = new Point(76, 42);
+            SearchPriceFrom.Name = "SearchPriceFrom";
+            SearchPriceFrom.Size = new Size(121, 23);
+            SearchPriceFrom.TabIndex = 33;
+            SearchPriceFrom.Validating += ValidateSearchingPrice;
+            // 
+            // SearchPriceTo
+            // 
+            SearchPriceTo.Location = new Point(76, 72);
+            SearchPriceTo.Name = "SearchPriceTo";
+            SearchPriceTo.Size = new Size(121, 23);
+            SearchPriceTo.TabIndex = 32;
+            SearchPriceTo.Validating += ValidateSearchingPrice;
             // 
             // errorProvider1
             // 

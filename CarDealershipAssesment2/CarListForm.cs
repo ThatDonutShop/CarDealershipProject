@@ -5,7 +5,7 @@ using System.Text.RegularExpressions;
 namespace CarDealership.WinForms
 {
     public partial class CarListForm : Form
-    {
+    {    
         public CarListForm()
         {
             InitializeComponent();
@@ -91,7 +91,7 @@ namespace CarDealership.WinForms
             return carErrorProvider.GetError(input) == string.Empty;
         }
 
-        private bool ValidateYear(Control input, ErrorProvider errorProvider)
+        private static bool ValidateYear(Control input, ErrorProvider errorProvider)
         {
             if (new Regex("^(19|20)\\d{2}$").IsMatch(input.Text))
             {
@@ -138,7 +138,30 @@ namespace CarDealership.WinForms
             }
         }
 
-        private bool ValidatePrice(Control input, ErrorProvider errorProvider)
+        private bool ValidateSearchPriceRange()
+        {
+            if (SearchPriceFrom.Text == string.Empty || SearchPriceTo.Text == string.Empty)
+            {
+                return true;
+            }
+
+            var from = decimal.Parse(SearchPriceFrom.Text);
+            var to = decimal.Parse(SearchPriceTo.Text);
+
+            if (from >= to)
+            {
+                const string error = "'to' cannot be less than or equal to 'from'";
+                searchErrorProvider.SetError(SearchPriceFrom, error);
+                searchErrorProvider.SetError(SearchPriceTo, error);
+                return false;
+            }
+
+            searchErrorProvider.SetError(SearchPriceFrom, string.Empty);
+            searchErrorProvider.SetError(SearchPriceTo, string.Empty);
+            return true;
+        }
+
+        private static bool ValidatePrice(Control input, ErrorProvider errorProvider)
         {
             if (decimal.TryParse(input.Text, out decimal price))
             {
@@ -225,7 +248,7 @@ namespace CarDealership.WinForms
                     break;
                 case SearchType.MakeAndPriceRange:
                     var canSearch = true;
-                    
+
                     if (SearchPriceFrom.Text != string.Empty)
                     {
                         canSearch = ValidatePrice(SearchPriceFrom, searchErrorProvider);
@@ -234,9 +257,9 @@ namespace CarDealership.WinForms
                     if (SearchPriceTo.Text != string.Empty)
                     {
                         canSearch = ValidatePrice(SearchPriceTo, searchErrorProvider);
-                    }
+                    }                 
 
-                    if (canSearch)
+                    if (canSearch && ValidateSearchPriceRange())
                     {
                         var make = SearchByMake.Text;
                         _ = decimal.TryParse(SearchPriceFrom.Text, out var from);
@@ -251,7 +274,6 @@ namespace CarDealership.WinForms
 
         private void ShowSearchResults(IEnumerable<Car> filteredCars)
         {
-
             if (filteredCars.Any() == false)
             {
                 MessageBox.Show("No search results found");
