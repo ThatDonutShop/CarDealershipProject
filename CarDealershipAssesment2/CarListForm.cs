@@ -1,9 +1,6 @@
 using CarDealership.Core;
 using System.ComponentModel;
-using System.ComponentModel.DataAnnotations;
-using System.Reflection;
 using System.Text.RegularExpressions;
-using System.Windows.Forms;
 
 namespace CarDealership.WinForms
 {
@@ -23,11 +20,6 @@ namespace CarDealership.WinForms
             };
 
             SearchBy.SelectedIndex = 0;
-
-            SearchByPriceFrom.Maximum = decimal.MaxValue;
-            SearchByPriceFrom.Minimum = decimal.Zero;
-            SearchByPriceTo.Maximum = decimal.MaxValue;
-            SearchByPriceTo.Minimum = decimal.Zero;
 
             ConfigureSearchForm();
         }
@@ -75,10 +67,18 @@ namespace CarDealership.WinForms
             TaxPayment.Text = Sales.GetTaxPayment(cars).ToString("C");
         }
 
-        private void ValidateNotEmpty(object sender, CancelEventArgs e)
+        private void OnLeave(object sender, EventArgs e)
         {
-            var input = (TextBox)sender;
+            var theControlBeingLeft = (Control)sender;
 
+            if (string.IsNullOrEmpty(theControlBeingLeft.Text))
+            {
+                carErrorProvider.SetError(theControlBeingLeft, string.Empty);
+            }
+        }
+
+        private bool ValidateNotEmpty(Control input)
+        {
             if (string.IsNullOrWhiteSpace(input.Text))
             {
                 carErrorProvider.SetError(input, "It can't be left empty");
@@ -87,60 +87,92 @@ namespace CarDealership.WinForms
             {
                 carErrorProvider.SetError(input, string.Empty);
             }
+
+            return carErrorProvider.GetError(input) == string.Empty;
         }
 
-        private void ValidateYear(object sender, CancelEventArgs e)
+        private bool ValidateYear(Control input, ErrorProvider errorProvider)
         {
-            var input = (TextBox)sender;
-
             if (new Regex("^(19|20)\\d{2}$").IsMatch(input.Text))
             {
-                carErrorProvider.SetError(Year, string.Empty);
+                errorProvider.SetError(input, string.Empty);
 
                 var year = int.Parse(input.Text);
 
                 if (year > DateTime.Now.Year)
                 {
-                    carErrorProvider.SetError(Year, $"The year cannot be greater than {DateTime.Now.Year}");
+                    errorProvider.SetError(input, $"The year cannot be greater than {DateTime.Now.Year}");
                 }
             }
             else
             {
-                carErrorProvider.SetError(Year, "Only valid years are allowed. Example: 2023");
+                errorProvider.SetError(input, "Only valid years are allowed. Example: 2023");
+            }
+
+            return errorProvider.GetError(input) == string.Empty;
+        }
+
+        private void ValidateYear(object sender, CancelEventArgs e)
+        {
+            if (Year.Text != string.Empty && ValidateYear(Year, carErrorProvider) == false)
+            {
+                e.Cancel = true;
             }
         }
 
-        private void ValidatePrice(object sender, CancelEventArgs e)
+        private void ValidateSearchingYear(object sender, CancelEventArgs e)
         {
-            var input = (TextBox)sender;
+            var input = (Control)sender;
+            if (Year.Text != string.Empty && ValidateYear(input, searchErrorProvider) == false)
+            {
+                e.Cancel = true;
+            }
+        }
 
+        private void ValidateSearchingPrice(object sender, CancelEventArgs e)
+        {
+            var input = (Control)sender;
+            if (Year.Text != string.Empty && ValidatePrice(input, searchErrorProvider) == false)
+            {
+                e.Cancel = true;
+            }
+        }
+
+        private bool ValidatePrice(Control input, ErrorProvider errorProvider)
+        {
             if (decimal.TryParse(input.Text, out decimal price))
             {
                 if (price > decimal.Zero)
                 {
-                    carErrorProvider.SetError(input, string.Empty);
+                    errorProvider.SetError(input, string.Empty);
                 }
                 else
                 {
-                    carErrorProvider.SetError(input, "A price greater than zero is required.");
+                    errorProvider.SetError(input, "A price greater than zero is required.");
                 }
             }
             else
             {
-                carErrorProvider.SetError(input, "Only a valid price is allowed. Example 9,000");
+                errorProvider.SetError(input, "Only a valid price is allowed. Example 9,000");
+            }
+
+            return errorProvider.GetError(input) == string.Empty;
+        }
+
+        private void ValidatePrice(object sender, CancelEventArgs e)
+        {
+            if (Price.Text != string.Empty && ValidatePrice(Price, carErrorProvider) == false)
+            {
+                e.Cancel = true;
             }
         }
 
         private bool ValidateCar()
         {
-            var cancelArgs = new CancelEventArgs();
-
-            ValidateNotEmpty(Make, cancelArgs);
-            ValidateNotEmpty(Model, cancelArgs);
-            ValidateYear(Year, cancelArgs);
-            ValidatePrice(Price, cancelArgs);
-
-            return carErrorProvider.HasErrors == false;
+            return ValidateYear(Year, carErrorProvider) &
+                ValidatePrice(Price, carErrorProvider) &
+                ValidateNotEmpty(Make) &
+                ValidateNotEmpty(Model);
         }
 
         private async void SaveFile_Click(object sender, EventArgs e)
@@ -177,44 +209,65 @@ namespace CarDealership.WinForms
 
         private void Search_Click(object sender, EventArgs e)
         {
+            searchErrorProvider.Clear();
+
             var cars = CarList.Items.OfType<Car>();
-            var filteredCars = new List<Car>();
 
             switch (((SearchOption)SearchBy.SelectedItem).By)
             {
                 case SearchType.Year:
-                    filteredCars.AddRange(Filter.SearchForCarsSinceTheYear(
-                        cars,
-                        SearchByYear.Value.Year));
 
-                    break;
-
-                case SearchType.MakeAndPriceRange:
-                    filteredCars.AddRange(Filter.SearchBy(
-                        cars,
-                        SearchByMake.Text,
-                        SearchByPriceFrom.Value,
-                        SearchByPriceTo.Value));
-
-                    break;
-            }
-
-            if (ValidateSearch())
-            {
-                if (filteredCars.Any() == false)
-                {
-                    MessageBox.Show("No search results found");
-                }
-                else
-                {
-                    ClearCarList();
-
-                    foreach (var car in filteredCars)
+                    if (ValidateYear(SearchByYear, searchErrorProvider))
                     {
-                        CarList.Items.Add(car);
+                        var carsSince = Filter.SearchForCarsSinceTheYear(cars, int.Parse(SearchByYear.Text));
+                        ShowSearchResults(carsSince);
                     }
-                }
+                    break;
+                case SearchType.MakeAndPriceRange:
+                    var canSearch = true;
+                    
+                    if (SearchPriceFrom.Text != string.Empty)
+                    {
+                        canSearch = ValidatePrice(SearchPriceFrom, searchErrorProvider);
+                    }
+
+                    if (SearchPriceTo.Text != string.Empty)
+                    {
+                        canSearch = ValidatePrice(SearchPriceTo, searchErrorProvider);
+                    }
+
+                    if (canSearch)
+                    {
+                        var make = SearchByMake.Text;
+                        _ = decimal.TryParse(SearchPriceFrom.Text, out var from);
+                        _ = decimal.TryParse(SearchPriceTo.Text, out var to);
+                        var carsFound = Filter.SearchBy(cars, make, from, to);
+                        ShowSearchResults(carsFound);
+                    }
+
+                    break;
             }
+        }
+
+        private void ShowSearchResults(IEnumerable<Car> filteredCars)
+        {
+
+            if (filteredCars.Any() == false)
+            {
+                MessageBox.Show("No search results found");
+            }
+            else
+            {
+                ClearCarList();
+
+                foreach (var car in filteredCars)
+                {
+                    CarList.Items.Add(car);
+                }
+
+            }
+
+            ShowSaleStatistics();
         }
 
         private void ConfigureSearchForm()
@@ -228,58 +281,6 @@ namespace CarDealership.WinForms
         private void SearchBy_SelectedIndexChanged(object sender, EventArgs e)
         {
             ConfigureSearchForm();
-        }
-
-        private void ValidatePriceFromSearch(object sender, CancelEventArgs e)
-        {
-            var input = (NumericUpDown)sender;
-
-            if (decimal.TryParse(input.Text, out decimal PriceFrom))
-            {
-                if (PriceFrom < decimal.Zero)
-                {
-                    searchErrorProvider.SetError(input, string.Empty);
-                }
-                else
-                {
-                    searchErrorProvider.SetError(input, "A price less than zero is not accepted.");
-                }
-            }
-            else
-            {
-                searchErrorProvider.SetError(input, "Only a valid price is allowed. Example 9,000");
-            }
-        }
-
-        private void ValidatePriceTo(object sender, CancelEventArgs e)
-        {
-            var input = (NumericUpDown)sender;
-
-            if (decimal.TryParse(input.Text, out decimal PriceTo))
-            {
-                if (PriceTo < decimal.Zero)
-                {
-                    searchErrorProvider.SetError(input, string.Empty);
-                }
-                else
-                {
-                    searchErrorProvider.SetError(input, "A price less than zero is not accepted.");
-                }
-            }
-            else
-            {
-                searchErrorProvider.SetError(input, "Only a valid price is allowed. Example 9,000");
-            }
-        }
-
-        private bool ValidateSearch()
-        {
-            var cancelArgs = new CancelEventArgs();
-
-            ValidatePriceFromSearch(SearchByPriceFrom, cancelArgs);
-            ValidatePriceTo(SearchByPriceTo, cancelArgs);
-
-            return searchErrorProvider.HasErrors == false;
         }
     }
 }

@@ -40,24 +40,29 @@ namespace CarDealership.Core
 
         public static async Task<IEnumerable<Car>> Load()
         {
-            var cars = new List<Car>();
+            if (File.Exists(FilePath))
+            {
+                var cars = new List<Car>();
 
-            using FileStream fileStream = new FileStream(
-                FilePath,
-                FileMode.Open,
-                FileAccess.Read,
-                FileShare.Read,
-                bufferSize: 4096,
-                useAsync: true);
+                using FileStream fileStream = new FileStream(
+                    FilePath,
+                    FileMode.Open,
+                    FileAccess.Read,
+                    FileShare.Read,
+                    bufferSize: 4096,
+                    useAsync: true);
 
-            byte[] serializedData = new byte[fileStream.Length];
-            await fileStream.ReadAsync(serializedData, 0, serializedData.Length);
+                byte[] serializedData = new byte[fileStream.Length];
+                await fileStream.ReadAsync(serializedData, 0, serializedData.Length);
 
-            using MemoryStream memoryStream = new MemoryStream(serializedData);
+                using MemoryStream memoryStream = new MemoryStream(serializedData);
 
-            BinaryFormatter formatter = new BinaryFormatter();
+                BinaryFormatter formatter = new BinaryFormatter();
 
-            return (Car[])formatter.Deserialize(memoryStream);
+                return (Car[])formatter.Deserialize(memoryStream);
+            }
+
+            return Enumerable.Empty<Car>();
         }
     }
 }
