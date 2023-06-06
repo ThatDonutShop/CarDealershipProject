@@ -31,6 +31,7 @@ namespace CarDealership.WinForms
 
             ConfigureSearchForm();
         }
+
         private void ClearInputs()
         {
             Make.Text = string.Empty;
@@ -278,7 +279,7 @@ namespace CarDealership.WinForms
             ValidatePriceFromSearch(SearchByPriceFrom, cancelArgs);
             ValidatePriceTo(SearchByPriceTo, cancelArgs);
 
-            return carErrorProvider.HasErrors == false;
+            return searchErrorProvider.HasErrors == false;
         }
     }
 }
