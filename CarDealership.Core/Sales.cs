@@ -19,7 +19,7 @@
             var totalPrice = GetTotalPriceExcludingGst(cars);
             var taxRate = TaxRates.TaxRateSearching(totalPrice);
             return totalPrice * taxRate;
-        }
+        }    
 
         public static decimal GetAverageCarSalePriceIncludingGst(IEnumerable<Car> cars)
         {
