@@ -11,6 +11,11 @@ namespace CarDealership.WinForms
             InitializeComponent();
         }
 
+        /// <summary>
+        /// When the form loads it will set up the search options
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void CarListForm_Load(object sender, EventArgs e)
         {
             SearchBy.DataSource = new List<SearchOption>
@@ -24,6 +29,9 @@ namespace CarDealership.WinForms
             ConfigureSearchForm();
         }
 
+        /// <summary>
+        /// Clears inputs for adding to CarList
+        /// </summary>
         private void ClearInputs()
         {
             Make.Text = string.Empty;
@@ -32,6 +40,11 @@ namespace CarDealership.WinForms
             Price.Text = string.Empty;
         }
 
+        /// <summary>
+        /// When you add to list if valid it will add them to the CarList listBox
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void AddToList_OnClick(object sender, EventArgs e)
         {
             if (ValidateCar())
@@ -47,11 +60,19 @@ namespace CarDealership.WinForms
             }
         }
 
+        /// <summary>
+        /// clears the CarList listBox
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ClearList_Click(object sender, EventArgs e)
         {
             ClearCarList();
         }
 
+        /// <summary>
+        /// Clears CarList and the sale stats (TaxRate, and average sale prices)
+        /// </summary>
         private void ClearCarList()
         {
             CarList.Items.Clear();
@@ -59,6 +80,9 @@ namespace CarDealership.WinForms
             ShowSaleStatistics();
         }
 
+        /// <summary>
+        /// Shows the sale statistics and converts them to "C" (currency)
+        /// </summary>
         private void ShowSaleStatistics()
         {
             var cars = CarList.Items.OfType<Car>();
@@ -67,6 +91,12 @@ namespace CarDealership.WinForms
             TaxPayment.Text = Sales.GetTaxPayment(cars).ToString("C");
         }
 
+        /// <summary>
+        /// When in a textBox for adding to list such as year if its not 
+        /// valid you cant leave the text box unless its been emptyed
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void OnLeave(object sender, EventArgs e)
         {
             var theControlBeingLeft = (Control)sender;
@@ -77,6 +107,11 @@ namespace CarDealership.WinForms
             }
         }
 
+        /// <summary>
+        /// If the feilds Make and Model are left empty when adding to list error providers will show 
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
         private bool ValidateNotEmpty(Control input)
         {
             if (string.IsNullOrWhiteSpace(input.Text))
@@ -91,6 +126,12 @@ namespace CarDealership.WinForms
             return carErrorProvider.GetError(input) == string.Empty;
         }
 
+        /// <summary>
+        /// validates the criteria for Year
+        /// </summary>
+        /// <param name="input"></param>
+        /// <param name="errorProvider"></param>
+        /// <returns></returns>
         private static bool ValidateYear(Control input, ErrorProvider errorProvider)
         {
             if (new Regex("^(19|20)\\d{2}$").IsMatch(input.Text))
@@ -112,6 +153,11 @@ namespace CarDealership.WinForms
             return errorProvider.GetError(input) == string.Empty;
         }
 
+        /// <summary>
+        /// If the year is valid and not empty you can leave the text box
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ValidateYear(object sender, CancelEventArgs e)
         {
             if (Year.Text != string.Empty && ValidateYear(Year, carErrorProvider) == false)
@@ -120,6 +166,11 @@ namespace CarDealership.WinForms
             }
         }
 
+        /// <summary>
+        /// Validates the year search
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ValidateSearchingYear(object sender, CancelEventArgs e)
         {
             var input = (Control)sender;
@@ -129,6 +180,11 @@ namespace CarDealership.WinForms
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ValidateSearchingPrice(object sender, CancelEventArgs e)
         {
             var input = (Control)sender;
@@ -138,6 +194,10 @@ namespace CarDealership.WinForms
             }
         }
 
+        /// <summary>
+        /// Validates the searching price range criteria and displays error provideors
+        /// </summary>
+        /// <returns></returns>
         private bool ValidateSearchPriceRange()
         {
             if (SearchPriceFrom.Text == string.Empty || SearchPriceTo.Text == string.Empty)
@@ -161,6 +221,12 @@ namespace CarDealership.WinForms
             return true;
         }
 
+        /// <summary>
+        /// Validates Price for criteria and displays error providers 
+        /// </summary>
+        /// <param name="input"></param>
+        /// <param name="errorProvider"></param>
+        /// <returns></returns>
         private static bool ValidatePrice(Control input, ErrorProvider errorProvider)
         {
             if (decimal.TryParse(input.Text, out decimal price))
@@ -182,6 +248,11 @@ namespace CarDealership.WinForms
             return errorProvider.GetError(input) == string.Empty;
         }
 
+        /// <summary>
+        /// if the price textBox is empty or valid it will let you leave the text box
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ValidatePrice(object sender, CancelEventArgs e)
         {
             if (Price.Text != string.Empty && ValidatePrice(Price, carErrorProvider) == false)
@@ -190,6 +261,10 @@ namespace CarDealership.WinForms
             }
         }
 
+        /// <summary>
+        /// validates all the cars text boxes
+        /// </summary>
+        /// <returns></returns>
         private bool ValidateCar()
         {
             return ValidateYear(Year, carErrorProvider) &
@@ -198,6 +273,11 @@ namespace CarDealership.WinForms
                 ValidateNotEmpty(Model);
         }
 
+        /// <summary>
+        /// Saves the file on click if there is items to save
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private async void SaveFile_Click(object sender, EventArgs e)
         {
             var cars = CarList.Items.OfType<Car>();
@@ -223,6 +303,11 @@ namespace CarDealership.WinForms
             }
         }
 
+        /// <summary>
+        /// Loads the txt file onto the list box
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private async void LoadFile_Click(object sender, EventArgs e)
         {
             CarList.Items.Clear();
@@ -235,6 +320,12 @@ namespace CarDealership.WinForms
             ShowSaleStatistics();
         }
 
+        /// <summary>
+        /// allows the seaching text boxes to be searched for using the
+        /// cars loaded onto the list box and validates the text boxes
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Search_Click(object sender, EventArgs e)
         {
             searchErrorProvider.Clear();
@@ -277,6 +368,11 @@ namespace CarDealership.WinForms
             }
         }
 
+        /// <summary>
+        /// If there are no search results that meet the criteria it will show no search
+        /// results found otherwise load the filtered cars onto the CarList list box
+        /// </summary>
+        /// <param name="filteredCars"></param>
         private void ShowSearchResults(IEnumerable<Car> filteredCars)
         {
             if (filteredCars.Any() == false)
@@ -297,6 +393,9 @@ namespace CarDealership.WinForms
             ShowSaleStatistics();
         }
 
+        /// <summary>
+        /// makes search panels visible depending on whats selected
+        /// </summary>
         private void ConfigureSearchForm()
         {
             var by = ((SearchOption)SearchBy.SelectedItem).By;
@@ -305,6 +404,11 @@ namespace CarDealership.WinForms
             MakeAndPriceRangePanel.Visible = by == SearchType.MakeAndPriceRange;
         }
 
+        /// <summary>
+        /// When you change from make and price search or year it will make the corisponding panel visible
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void SearchBy_SelectedIndexChanged(object sender, EventArgs e)
         {
             ConfigureSearchForm();

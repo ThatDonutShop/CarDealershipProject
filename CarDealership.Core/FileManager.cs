@@ -6,6 +6,11 @@ namespace CarDealership.Core
     {
         private const string FilePath = "CarList.txt";
 
+        /// <summary>
+        /// Saves the cars to the file CarList.txt
+        /// </summary>
+        /// <param name="cars"></param>
+        /// <returns></returns>
         public static async Task<bool> Save(IEnumerable<Car> cars)
         {
             try
@@ -38,6 +43,10 @@ namespace CarDealership.Core
             return false;
         }
 
+        /// <summary>
+        /// Loads the txt file onto CarList
+        /// </summary>
+        /// <returns></returns>
         public static async Task<IEnumerable<Car>> Load()
         {
             if (File.Exists(FilePath))

@@ -3,6 +3,11 @@ namespace CarDealership.Core
 {
     public static class TaxRates
     {     
+        /// <summary>
+        /// Gets the taxRates and priceRanges and uses the to arrays to get the tax payment
+        /// </summary>
+        /// <param name="totalPrice"></param>
+        /// <returns></returns>
         public static decimal TaxRateSearching(decimal totalPrice)
         {
             decimal[] taxRates = { 0.0m, 0.17m, 0.19m, 0.21m, 0.25m, 0.30m };
