@@ -5,7 +5,7 @@ using System.Text.RegularExpressions;
 namespace CarDealership.WinForms
 {
     public partial class CarListForm : Form
-    {    
+    {
         public CarListForm()
         {
             InitializeComponent();
@@ -202,6 +202,11 @@ namespace CarDealership.WinForms
         {
             var cars = CarList.Items.OfType<Car>();
 
+            if (!cars.Any())
+            {
+                MessageBox.Show("No cars to save", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
             if (cars.Any())
             {
                 var saved = await FileManager.Save(cars);
@@ -257,7 +262,7 @@ namespace CarDealership.WinForms
                     if (SearchPriceTo.Text != string.Empty)
                     {
                         canSearch = ValidatePrice(SearchPriceTo, searchErrorProvider);
-                    }                 
+                    }
 
                     if (canSearch && ValidateSearchPriceRange())
                     {
